@@ -172,7 +172,7 @@ Extra resources that I used to complete this challenge:
 #
 
 ## What We Learned:
-###In this challenge, as a software engineering bootcamp team, we have learned to:
+### In this challenge, as a software engineering bootcamp team, we have learned to:
 
 
 
@@ -214,10 +214,10 @@ SOFTWARE.
 #
 ## Authors
 
-Follow us on Github at [AmandaGray](https://github.com/Berkeleycodingmomma)! 
-Follow us on Github at [AartiContractor](https://github.com/aarticontractor)! 
-Follow us on Github at [KaidenParcher]()! 
-Follow us on Github at [LaurieFish]()! 
+- Follow us on Github at [AmandaGray](https://github.com/Berkeleycodingmomma)! 
+- Follow us on Github at [AartiContractor](https://github.com/aarticontractor)! 
+- Follow us on Github at [KaidenParcher]()! 
+- Follow us on Github at [LaurieFish]()! 
 
 
 ## Acknowledgments
