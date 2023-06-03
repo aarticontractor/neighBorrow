@@ -30,13 +30,11 @@ const typeDefs = gql`
     token: ID
     user: User
   }
-
-  type Query {
-    product(id: ID!): Product
-    categories: [Category]
-    user: User
-    productType(id: ID!): ProductType
-  }
+type Query {
+  categories: [Category]
+  **more here**
+}
+ 
 
   type Mutation {
     addUser(
