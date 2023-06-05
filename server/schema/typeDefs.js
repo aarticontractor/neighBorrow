@@ -25,7 +25,7 @@ const typeDefs = gql`
     user: User
   }
 type Query {
-  categories: [Category]
+  getCategory: [Category]
   getUsers: [User]
   getProducts: [Product]
 }
@@ -46,7 +46,10 @@ type Query {
       categoryId: ID!
       userId: ID!
     ): Product
-    
+
+    addCategory(
+      name: String!
+    ): Category
   }
 `;
 
