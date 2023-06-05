@@ -53,6 +53,11 @@ extend type Query {
     addCategory(
       name: String!
     ): Category
+    
+    login(
+      email: String!, 
+      password: String!
+      ): Auth
   }
 `;
 
