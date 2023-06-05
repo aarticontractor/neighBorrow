@@ -5,46 +5,54 @@ const typeDefs = gql`
     _id: ID
     name: String
   }
-  type ProductType {
-    _id: ID
-    name: String
-    category: Category
-  }
   type Product {
     _id: ID
     name: String
     description: String
     image: String
     price: Float
-    productType: ProductType
     category: Category
+    user: User
   }
   type User {
     _id: ID
     firstName: String
     lastName: String
     email: String
-    password: String
   }
   type Auth {
     token: ID
     user: User
   }
 type Query {
-  categories: [Category]
-  **more here**
+  getCategory: [Category]
+  getUsers: [User]
+  getProducts: [Product]
 }
- 
-
+extend type Query {
+  getProducts: [Product]
+  getProductbyID(productId: ID!): Product
+}
   type Mutation {
     addUser(
       firstName: String!
       lastName: String!
       email: String!
       password: String!
-    ):
-  ****Update user????***
-    
+    ): Auth
+  
+    addProduct(
+      name: String!
+      description: String
+      image: String
+      price: Float!
+      categoryId: ID!
+      userId: ID!
+    ): Product
+
+    addCategory(
+      name: String!
+    ): Category
   }
 `;
 
