@@ -6,6 +6,9 @@ const resolvers = {
     Query: {
         categories: async () => {
             return await Category.find();
+        },
+        getUsers: async () => {
+            return await User.find();
         }
     },
     Mutation: {
@@ -15,7 +18,7 @@ const resolvers = {
             const token = signToken(user);
 
             return { token, user };
-        }
+        },
     }
 }
 
