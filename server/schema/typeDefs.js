@@ -5,26 +5,20 @@ const typeDefs = gql`
     _id: ID
     name: String
   }
-  type ProductType {
-    _id: ID
-    name: String
-    category: Category
-  }
   type Product {
     _id: ID
     name: String
     description: String
     image: String
     price: Float
-    productType: ProductType
     category: Category
+    user: User
   }
   type User {
     _id: ID
     firstName: String
     lastName: String
     email: String
-    password: String
   }
   type Auth {
     token: ID
@@ -33,6 +27,7 @@ const typeDefs = gql`
 type Query {
   categories: [Category]
   getUsers: [User]
+  getProducts: [Product]
 }
  
   type Mutation {
@@ -43,6 +38,14 @@ type Query {
       password: String!
     ): Auth
   
+    addProduct(
+      name: String!
+      description: String
+      image: String
+      price: Float!
+      categoryId: ID!
+      userId: ID!
+    ): Product
     
   }
 `;
