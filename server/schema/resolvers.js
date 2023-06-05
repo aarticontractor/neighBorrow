@@ -11,7 +11,14 @@ const resolvers = {
         },
         getUsers: async () => {
             return await User.find();
-        }
+        },
+        getProducts: async () => {
+            return await Product.find().populate('user').populate('category');
+        },
+
+        getProductbyID: async (_, { productId }) => {
+            return await Product.findById(productId).populate('user').populate('category');
+        },
     },
     Mutation: {
         addUser: async (_, args) => {

@@ -29,7 +29,10 @@ type Query {
   getUsers: [User]
   getProducts: [Product]
 }
- 
+extend type Query {
+  getProducts: [Product]
+  getProductbyID(productId: ID!): Product
+}
   type Mutation {
     addUser(
       firstName: String!
