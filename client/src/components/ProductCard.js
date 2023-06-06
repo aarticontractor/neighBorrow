@@ -30,7 +30,7 @@ const ProductCard = ({ product, onProductClick }) => {
                     <Typography gutterBottom variant="h5" component="div" ref={nameRef}>
                         {product.name}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary" ref={priceRef}>
+                    <Typography variant="body2" color="secondary" ref={priceRef}>
                         ${product.price}
                     </Typography>
                 </CardContent>
