@@ -20,6 +20,9 @@ const Signup = () => {
           [name]: value,
         });
       };
+      const handleFormSubmit = async (event) => {
+        event.preventDefault();
+        console.log(formState);
     
 
 }
