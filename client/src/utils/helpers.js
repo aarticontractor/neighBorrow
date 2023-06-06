@@ -53,4 +53,8 @@ export function idbPromise(storeName, method, object) {
             };
         };
     });
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
 }
