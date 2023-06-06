@@ -11,3 +11,5 @@ export const GET_PRODUCTS = gql`
     }
   }
 `;
+
+export const QUERY_CHECKOUT = gql``;

@@ -4,3 +4,7 @@ export function pluralize(name, count) {
     }
     return name + 's';
 }
+
+export function idbPromise() {
+    // Function implementation
+}
