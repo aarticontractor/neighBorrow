@@ -1,23 +1,12 @@
 
 import React from 'react';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { Container, Grid, TextField, Button } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab'
 import SearchIcon from '@material-ui/icons/Search';
 import ProductCard from '../components/ProductCard';
 import ProductModal from '../components/ProductModal';
-
-const GET_PRODUCTS = gql`
-  query GetProducts {
-    getProducts {
-      _id
-      name
-      description
-      price
-      image
-    }
-  }
-`;
+import { GET_PRODUCTS } from '../utils/queries'
 
 const PRODUCTS_PER_PAGE = 2; // set the number of products per page
 
