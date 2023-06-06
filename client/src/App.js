@@ -8,7 +8,9 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import Checkout from './pages/Checkout.js';
-// import UserPage from './pages/UserPage.js';
+import UserPage from './pages/UserPage.js';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 
 
 import NavBar from './components/NavBar';
@@ -42,9 +44,10 @@ function App() {
                 <NavBar />
                 <Routes>
                     <Route path='/' element={<Home />} />
-                    <Route path='/' element={<UserPage />} />
-                   
+                    <Route path='/UserPage' element={<UserPage />} />
                     <Route path='/checkout' element={<Checkout />} />
+                    <Route path='/Login' element={<Login />} />
+                    <Route path='/Signup' element={<Signup />} />
                 </Routes>
             </Router>
         </ApolloProvider>

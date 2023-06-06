@@ -15,6 +15,7 @@ const Home = () => {
     const [page, setPage] = React.useState(1);
     const { loading, error, data } = useQuery(GET_ALL_PRODUCTS);
 
+
     const handleProductClick = (product) => {
         setSelectedProduct(product);
         setIsModalOpen(true);

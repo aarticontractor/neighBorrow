@@ -16,7 +16,7 @@ const resolvers = {
             return await Product.find().populate('user').populate('category');
         },
 
-        getProductbyID: async (_, { productId }) => {
+        getProductByID: async (_, { productId }) => {
             return await Product.findById(productId).populate('user').populate('category');
         },
     },

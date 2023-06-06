@@ -31,7 +31,7 @@ type Query {
 }
 extend type Query {
   getProducts: [Product]
-  getProductbyID(productId: ID!): Product
+  getProductByID(productId: ID!): Product
 }
   type Mutation {
     addUser(
