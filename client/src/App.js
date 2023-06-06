@@ -38,6 +38,7 @@ function App() {
                 <NavBar />
                 <Routes>
                     <Route path='/' element={<Home />} />
+                    <Route path='/' element={<UserPage />} /> 
                 </Routes>
             </Router>
         </ApolloProvider>
