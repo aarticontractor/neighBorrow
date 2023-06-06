@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { Container, Grid, TextField, Button } from '@material-ui/core';
@@ -6,7 +5,7 @@ import { Pagination } from '@material-ui/lab'
 import SearchIcon from '@material-ui/icons/Search';
 import ProductCard from '../components/ProductCard';
 import ProductModal from '../components/ProductModal';
-import { GET_PRODUCTS } from '../utils/queries'
+import { GET_ALL_PRODUCTS } from '../utils/queries'
 
 const PRODUCTS_PER_PAGE = 10; // set the number of products per page
 
@@ -14,7 +13,7 @@ const Home = () => {
     const [selectedProduct, setSelectedProduct] = React.useState(null);
     const [isModalOpen, setIsModalOpen] = React.useState(false);
     const [page, setPage] = React.useState(1);
-    const { loading, error, data } = useQuery(GET_PRODUCTS);
+    const { loading, error, data } = useQuery(GET_ALL_PRODUCTS);
 
     const handleProductClick = (product) => {
         setSelectedProduct(product);

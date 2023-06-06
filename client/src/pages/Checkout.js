@@ -10,7 +10,7 @@ import {
     ADD_TO_CART,
     UPDATE_PRODUCTS,
 } from '../utils/action';
-import { GET_PRODUCTS } from '../utils/queries';
+import { QUERY_ALL_PRODUCTS } from '../utils/queries';
 import { idbPromise } from '../utils/helpers';
 
 
@@ -20,7 +20,7 @@ function Detail() {
 
     const [currentProduct, setCurrentProduct] = useState({});
 
-    const { loading, data } = useQuery(GET_PRODUCTS);
+    const { loading, data } = useQuery(QUERY_ALL_PRODUCTS);
 
     const { products, cart } = state;
 
