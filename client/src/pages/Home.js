@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { Container, Grid, TextField, Button } from '@material-ui/core';
+import { Container, Grid, TextField, Button, Select, MenuItem } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab'
 import SearchIcon from '@material-ui/icons/Search';
 import ProductCard from '../components/ProductCard';
@@ -13,6 +13,9 @@ const Home = () => {
     const [selectedProduct, setSelectedProduct] = React.useState(null);
     const [isModalOpen, setIsModalOpen] = React.useState(false);
     const [page, setPage] = React.useState(1);
+    const [priceRange, setPriceRange] = React.useState('All');
+    const [search, setSearch] = React.useState('');
+    const [filteredProducts, setFilteredProducts] = React.useState([]);
     const { loading, error, data } = useQuery(GET_ALL_PRODUCTS);
 
 
@@ -29,16 +32,48 @@ const Home = () => {
         setPage(value);
     };
 
+    const handleSearch = () => {
+        let filtered = data.getProducts.filter(product => {
+            const nameMatch = product.name.toLowerCase().includes(search.toLowerCase());
+            if (priceRange === 'All') {
+                return nameMatch;
+            } else {
+                const [minPrice, maxPrice] = priceRange.split('-');
+                const inPriceRange = product.price >= Number(minPrice) && (!maxPrice || product.price <= Number(maxPrice));
+                return nameMatch && inPriceRange;
+            }
+        });
+        setPage(1);
+        setFilteredProducts(filtered);
+    };
+
+    React.useEffect(() => {
+        if (data) {
+            handleSearch();
+        }
+    }, [data, search, priceRange]);
+
     if (loading) return 'Loading...';
     if (error) return `Error! ${error.message}`;
 
-    const paginatedProducts = data.getProducts.slice((page - 1) * PRODUCTS_PER_PAGE, page * PRODUCTS_PER_PAGE);
+    const paginatedProducts = filteredProducts.slice((page - 1) * PRODUCTS_PER_PAGE, page * PRODUCTS_PER_PAGE);
 
     return (
         <Container>
             <div style={{ display: 'flex', justifyContent: 'center', margin: '1em 0' }}>
-                <TextField id="search" label="Search products" variant="outlined" />
-                <Button variant="contained" color="primary" style={{ margin: '0 0 0 0.5em' }}>
+                <TextField id="search" label="Search products" variant="outlined" onChange={(event) => setSearch(event.target.value)} />
+                <Select
+                    value={priceRange}
+                    onChange={event => setPriceRange(event.target.value)}
+                >
+                    <MenuItem value="All">All</MenuItem>
+                    <MenuItem value="0-50">$0 - $50</MenuItem>
+                    <MenuItem value="50-100">$50 - $100</MenuItem>
+                    <MenuItem value="100-200">$100 - $200</MenuItem>
+                    <MenuItem value="200-500">$200 - $500</MenuItem>
+                    <MenuItem value="500">$500+</MenuItem>
+                </Select>
+                <Button variant="contained" color="primary" style={{ margin: '0 0 0 0.5em' }} onClick={handleSearch}>
                     <SearchIcon />
                 </Button>
             </div>
@@ -50,7 +85,7 @@ const Home = () => {
                 ))}
             </Grid>
             <Pagination
-                count={Math.ceil(data.getProducts.length / PRODUCTS_PER_PAGE)}
+                count={Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE)}
                 page={page}
                 onChange={handlePageChange}
                 color="primary"
