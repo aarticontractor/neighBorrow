@@ -1,11 +1,12 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { Container, Grid, TextField, Button, Select, MenuItem } from '@material-ui/core';
-import { Pagination } from '@material-ui/lab'
+import { Pagination } from '@material-ui/lab';
 import SearchIcon from '@material-ui/icons/Search';
 import ProductCard from '../components/ProductCard';
 import ProductModal from '../components/ProductModal';
-import { GET_ALL_PRODUCTS } from '../utils/queries'
+import { GET_ALL_PRODUCTS } from '../utils/queries';
+import { useLocation } from 'react-router-dom';
 
 const PRODUCTS_PER_PAGE = 10; // set the number of products per page
 
@@ -17,7 +18,7 @@ const Home = () => {
     const [search, setSearch] = React.useState('');
     const [filteredProducts, setFilteredProducts] = React.useState([]);
     const { loading, error, data } = useQuery(GET_ALL_PRODUCTS);
-
+    const location = useLocation();
 
     const handleProductClick = (product) => {
         setSelectedProduct(product);
@@ -35,12 +36,15 @@ const Home = () => {
     const handleSearch = () => {
         let filtered = data.getProducts.filter(product => {
             const nameMatch = product.name.toLowerCase().includes(search.toLowerCase());
+            const categoryMatch = location.state?.category
+                ? product.category.parent === location.state.category.parent && product.category.name === location.state.category.name
+                : true;
             if (priceRange === 'All') {
-                return nameMatch;
+                return nameMatch && categoryMatch;
             } else {
                 const [minPrice, maxPrice] = priceRange.split('-');
                 const inPriceRange = product.price >= Number(minPrice) && (!maxPrice || product.price <= Number(maxPrice));
-                return nameMatch && inPriceRange;
+                return nameMatch && inPriceRange && categoryMatch;
             }
         });
         setPage(1);
@@ -51,7 +55,7 @@ const Home = () => {
         if (data) {
             handleSearch();
         }
-    }, [data, search, priceRange]);
+    }, [data, search, priceRange, location.state?.category]);
 
     if (loading) return 'Loading...';
     if (error) return `Error! ${error.message}`;
