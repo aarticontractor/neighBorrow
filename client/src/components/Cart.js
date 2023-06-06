@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
-import CartItem from '../CartItem';
+import CartItem from './CartItem';
 import { useLazyQuery } from '@apollo/client';
-import { idbPromise } from '../../utils/helpers';
-import Auth from '../..utils/auth';
-import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../..utils/actions';
+import { idbPromise } from '../utils/helpers';
+import Auth from '../utils/auth';
+import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../utils/action';
+import { useStoreContext } from '../utils/globalState.js';
+import { QUERY_CHECKOUT } from '../utils/queries.js';
 
 
 
