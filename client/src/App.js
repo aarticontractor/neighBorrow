@@ -13,6 +13,7 @@ import Checkout from './pages/Checkout.js';
 
 import NavBar from './components/NavBar';
 import Home from './pages/Home';
+import UserPage from './page/UserPage.js'
 
 
 const httpLink = createHttpLink({
@@ -41,7 +42,8 @@ function App() {
                 <NavBar />
                 <Routes>
                     <Route path='/' element={<Home />} />
-                    {/* <Route path='/userpage' element={<UserPage />} /> */}
+                    <Route path='/' element={<UserPage />} />
+                   
                     <Route path='/checkout' element={<Checkout />} />
                 </Routes>
             </Router>
