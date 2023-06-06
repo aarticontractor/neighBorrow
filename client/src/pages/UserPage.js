@@ -1,9 +1,20 @@
 import React from 'react';
-import FormControl, { useFormControl } from '@mui/material/FormControl';
+import TextField from '@mui/material/TextField';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 
 export default function UserPage() {
+    const [category, setCategory] = React.useState('');
+
+    const handleChange = (event) => {
+        setCategory(event.target.value);
+    };
+
     return (
         <Box component="form" noValidate autoComplete="off">
             <FormControl sx={{ width: '25ch' }}>
@@ -27,9 +38,9 @@ export default function UserPage() {
                     label="Category"
                     onChange={handleChange}
                 >
-                    <MenuItem value={"play_hard"}>Play Hard</MenuItem>
-                    <MenuItem value={"work_hard"}>Work Hard</MenuItem>
-                    <MenuItem value={"category_3"}>Category 3</MenuItem>
+                    <MenuItem value={'play_hard'}>Play Hard</MenuItem>
+                    <MenuItem value={'work_hard'}>Work Hard</MenuItem>
+                    <MenuItem value={'category_3'}>Category 3</MenuItem>
                 </Select>
             </FormControl>
             <FormControl sx={{ width: '25ch' }}>
