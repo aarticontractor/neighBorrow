@@ -8,7 +8,7 @@ import ProductCard from '../components/ProductCard';
 import ProductModal from '../components/ProductModal';
 import { GET_PRODUCTS } from '../utils/queries'
 
-const PRODUCTS_PER_PAGE = 2; // set the number of products per page
+const PRODUCTS_PER_PAGE = 10; // set the number of products per page
 
 const Home = () => {
     const [selectedProduct, setSelectedProduct] = React.useState(null);
