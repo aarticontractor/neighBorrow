@@ -6,6 +6,11 @@ const categorySchema = new Schema({
         type: String,
         required: true,
         trim: true
+    },
+    parent: {
+        type: String,
+        required: true,
+        trim: true
     }
 });
 

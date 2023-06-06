@@ -4,6 +4,7 @@ const typeDefs = gql`
   type Category {
     _id: ID
     name: String
+    parent: String
   }
   type Product {
     _id: ID
