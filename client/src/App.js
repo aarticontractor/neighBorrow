@@ -7,6 +7,9 @@ import {
     createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import Checkout from './pages/Checkout.js';
+import UserPage from './pages/UserPage.js';
+
 
 import NavBar from './components/NavBar';
 import Home from './pages/Home';
@@ -38,7 +41,8 @@ function App() {
                 <NavBar />
                 <Routes>
                     <Route path='/' element={<Home />} />
-                    <Route path='/' element={<UserPage />} /> 
+                    <Route path='/userpage' element={<UserPage />} />
+                    <Route path='/checkout' element={<Checkout />} />
                 </Routes>
             </Router>
         </ApolloProvider>
