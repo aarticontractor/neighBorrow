@@ -16,7 +16,6 @@ export const GET_PRODUCTS = gql`
   }
 `;
 
-
 export const QUERY_CHECKOUT = gql`
   query getCheckout($products: [ID]!) {
     checkout(products: $products) {
@@ -69,4 +68,7 @@ export const QUERY_USER = gql`
     }
   }
 `;
+<<<<<<< HEAD
+=======
 
+>>>>>>> main
