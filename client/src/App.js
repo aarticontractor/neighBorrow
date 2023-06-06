@@ -15,6 +15,7 @@ import Signup from './pages/Signup';
 
 import NavBar from './components/NavBar';
 import Home from './pages/Home';
+import UserPage from './page/UserPage.js'
 
 
 const httpLink = createHttpLink({
