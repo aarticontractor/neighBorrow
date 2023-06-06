@@ -39,7 +39,11 @@ function App() {
                 <NavBar />
                 <Routes>
                     <Route path='/' element={<Home />} />
+<<<<<<< HEAD
                     <Route path="/checkout" element={<Checkout />} />
+=======
+                    <Route path='/' element={<UserPage />} /> 
+>>>>>>> main
                 </Routes>
             </Router>
         </ApolloProvider>
