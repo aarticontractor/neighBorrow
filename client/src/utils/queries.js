@@ -16,6 +16,26 @@ export const GET_PRODUCTS = gql`
   }
 `;
 
+export const GET_ALL_PRODUCTS = gql`
+  query getAllProducts {
+    getProducts {
+      category {
+        name
+      }
+      description
+      image
+      name
+      price
+      user {
+        email
+        firstName
+        lastName
+      }
+      _id
+    }
+  }
+`;
+
 export const QUERY_CHECKOUT = gql`
   query getCheckout($products: [ID]!) {
     checkout(products: $products) {
@@ -68,7 +88,3 @@ export const QUERY_USER = gql`
     }
   }
 `;
-<<<<<<< HEAD
-=======
-
->>>>>>> main

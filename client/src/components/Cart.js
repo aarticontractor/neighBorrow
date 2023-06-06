@@ -3,23 +3,12 @@ import { loadStripe } from '@stripe/stripe-js';
 import CartItem from './CartItem';
 import { useLazyQuery } from '@apollo/client';
 import { idbPromise } from '../utils/helpers';
-<<<<<<< HEAD
-import Auth from '../utils/auth';
-import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../utils/action';
-import { QUERY_CHECKOUT } from '../utils/queries.js';
-import { useStoreContext } from '../utils/globalState';
-=======
+
 
 import Auth from '../utils/auth';
 import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../utils/action';
 import { useStoreContext } from '../utils/globalState.js';
 import { QUERY_CHECKOUT } from '../utils/queries.js';
-
-
->>>>>>> main
-
-
-
 
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
