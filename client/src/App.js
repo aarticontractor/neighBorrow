@@ -9,8 +9,8 @@ import {
 import { setContext } from '@apollo/client/link/context';
 import Checkout from './pages/Checkout.js';
 import UserPage from './pages/UserPage.js';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
+import Login from './pages/Login.js';
+import Signup from './pages/Signup.js';
 
 
 import NavBar from './components/NavBar';
