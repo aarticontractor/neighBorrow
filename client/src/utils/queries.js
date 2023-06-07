@@ -21,6 +21,7 @@ export const GET_ALL_PRODUCTS = gql`
     getProducts {
       category {
         name
+        parent
       }
       description
       image
@@ -59,11 +60,12 @@ export const QUERY_ALL_PRODUCTS = gql`
   }
 `;
 
-export const QUERY_CATEGORIES = gql`
-  {
-    categories {
-      _id
+export const GET_CATEGORIES = gql`
+query GetCategory {
+    getCategory {
       name
+      parent
+      _id
     }
   }
 `;

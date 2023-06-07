@@ -1,8 +1,11 @@
-import React from "react";
-import Auth from "../utils/auth";
-import { Link as RouterLink } from "react-router-dom";
-import { AppBar, Toolbar, Button, Typography, IconButton, makeStyles } from '@material-ui/core';
+import React from 'react';
+import { useQuery } from '@apollo/client';
+import { GET_CATEGORIES } from '../utils/queries';
+import Auth from '../utils/auth';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { AppBar, Toolbar, Button, Typography, IconButton, makeStyles, Menu, MenuItem, CircularProgress } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -18,8 +21,24 @@ const useStyles = makeStyles((theme) => ({
 
 function Nav() {
     const classes = useStyles();
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const navigate = useNavigate();
+    const { loading, error, data } = useQuery(GET_CATEGORIES);
 
-    function showNavigation() {
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const handleCategoryClick = (parent, subCategory) => {
+        navigate('/', { state: { category: { parent, name: subCategory } } });
+        handleClose();
+    };
+
+    const showNavigation = () => {
         if (Auth.loggedIn()) {
             return (
                 <>
@@ -55,7 +74,15 @@ function Nav() {
                 </>
             );
         }
-    }
+    };
+
+    const parentCategories = data?.getCategory?.reduce((acc, curr) => {
+        if (!acc[curr.parent]) {
+            acc[curr.parent] = [];
+        }
+        acc[curr.parent].push(curr.name);
+        return acc;
+    }, {});
 
     return (
         <AppBar position="static" className={classes.root}>
@@ -66,6 +93,36 @@ function Nav() {
                         NeighBorrow
                     </Typography>
                 </IconButton>
+
+                {loading ? (
+                    <CircularProgress color="secondary" />
+                ) : error ? (
+                    <Typography variant="body1" color="secondary">
+                        Error loading categories
+                    </Typography>
+                ) : (
+                    <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} color="inherit">
+                        Categories
+                        <ArrowDropDownIcon />
+                    </Button>
+                )}
+
+                <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+                    {parentCategories &&
+                        Object.entries(parentCategories).map(([parent, subCategories]) => (
+                            <div key={parent}>
+                                <MenuItem onClick={handleClose}>
+                                    <Typography variant="h6">{parent}</Typography>
+                                </MenuItem>
+                                {subCategories.map((subCategory) => (
+                                    <MenuItem key={subCategory} onClick={() => handleCategoryClick(parent, subCategory)}>
+                                        {subCategory}
+                                    </MenuItem>
+                                ))}
+                            </div>
+                        ))}
+                </Menu>
+
                 {showNavigation()}
             </Toolbar>
         </AppBar>
