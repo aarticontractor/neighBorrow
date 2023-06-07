@@ -3,11 +3,9 @@ import { Container, Grid, Typography, Card, CardContent, Avatar, Box } from '@ma
 import { makeStyles } from '@material-ui/core/styles';
 import anime from 'animejs';
 import member1 from '../aboutUs-imgs/Aarti.jpg'
+import member2 from '../aboutUs-imgs/Laurie.jpeg'
 import member3 from '../aboutUs-imgs/Kaiden.JPG';
 import member4 from '../aboutUs-imgs/Amanda.jpg';
-
-const member2 = 'https://res.cloudinary.com/dpil3zvj3/image/upload/v1683738706/jamfolio/qwdflcleqets5psegxr1.jpg';
-
 
 const useStyles = makeStyles(theme => ({
     root: {
