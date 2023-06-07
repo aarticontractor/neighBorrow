@@ -11,6 +11,8 @@ import Checkout from './pages/Checkout.js';
 import ListItem from './pages/ListItem.js';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import About from './pages/About';
+
 
 
 import NavBar from './components/NavBar';
@@ -48,6 +50,7 @@ function App() {
                     <Route path='/checkout' element={<Checkout />} />
                     <Route path='/Login' element={<Login />} />
                     <Route path='/Signup' element={<Signup />} />
+                    <Route path='/about' element={<About />} />
                 </Routes>
             </Router>
         </ApolloProvider>
