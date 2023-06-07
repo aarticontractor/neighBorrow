@@ -6,25 +6,19 @@ import { pluralize } from "../../utils/helpers"
 import { ADD_TO_CART, UPDATE_CART_QUANTITY } from "../utils/action";
 import { idbPromise } from "../utils/helpers";
 import { useSelector, useDispatch } from 'react-redux';
-// import { addToCart, updateCartQuantity } from '../utils/actions';
 
 
 function ProductItem(item) {
-    const state = useSelector((state) => state);
+    const state = useSelector((state) => {
+        return state;
+    });
     const dispatch = useDispatch();
+    const { cart } = state;
 
-    const {
-        image,
-        name,
-        _id,
-        price,
-        quantity
-    } = item;
-
-    const { cart } = state
 
     const addToCart = () => {
-        const itemInCart = cart.find((cartItem) => cartItem._id === _id)
+        const itemInCart = cart.find((cartItem) => cartItem._id === _id);
+
         if (itemInCart) {
             dispatch({
                 type: UPDATE_CART_QUANTITY,
@@ -43,7 +37,7 @@ function ProductItem(item) {
             idbPromise('cart', 'put', { ...item, purchaseQuantity: 1 });
         }
     }
-    // const { image, name, _id, price, quantity } = item;
+    const { image, name, _id, price, quantity } = item;
 
     return (
         <div className="productCard">
