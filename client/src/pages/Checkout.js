@@ -12,6 +12,7 @@ import {
 } from '../utils/action';
 import { QUERY_ALL_PRODUCTS } from '../utils/queries';
 import { idbPromise } from '../utils/helpers';
+import excited from '../assets/excited.jpeg';
 
 
 function Detail() {
@@ -103,7 +104,7 @@ function Detail() {
                     </p>
 
                     <img
-                        //src={} IMAGE HERE
+                        src={excited} IMAGE HERE
                         alt={currentProduct.name}
                     />
                 </div>
