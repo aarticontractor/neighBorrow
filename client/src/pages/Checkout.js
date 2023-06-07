@@ -1,27 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-
+import { useSelector, useDispatch } from 'react-redux';
 import Cart from '../components/Cart';
-import { useStoreContext } from '../utils/globalState';
+// import { useStoreContext } from '../utils/globalState';
 import {
     REMOVE_FROM_CART,
     UPDATE_CART_QUANTITY,
     ADD_TO_CART,
     UPDATE_PRODUCTS,
 } from '../utils/action';
-import { QUERY_ALL_PRODUCTS } from '../utils/queries';
+import { QUERY_PRODUCTS } from '../utils/queries';
 import { idbPromise } from '../utils/helpers';
 import excited from '../assets/excited.jpeg';
 
 
 function Detail() {
-    const [state, dispatch] = useStoreContext();
+    const state = useSelector((state) => {
+        return state;
+    });
     const { id } = useParams();
-
     const [currentProduct, setCurrentProduct] = useState({});
+    const dispatch = useDispatch();
 
-    const { loading, data } = useQuery(QUERY_ALL_PRODUCTS);
+
+
+
+
+    const { loading, data } = useQuery(QUERY_PRODUCTS);
 
     const { products, cart } = state;
 

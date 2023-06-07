@@ -9,13 +9,7 @@ import {
     TOGGLE_CART,
 } from './action';
 
-const initialState = {
-    products: [],
-    cart: [],
-    cartOpen: false,
-    categories: [],
-    currentCategory: '',
-};
+
 export const reducer = (state, action) => {
     switch (action.type) {
         case UPDATE_PRODUCTS:
