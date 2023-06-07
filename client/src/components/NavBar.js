@@ -72,6 +72,10 @@ function Nav() {
                     <Button color="inherit" component={RouterLink} to="/login">
                         Login
                     </Button>
+                    {/* Temporary */}
+                    <Button color="inherit" component={RouterLink} to="/userProfile">
+                        Profile
+                    </Button>
                 </>
             );
         }

@@ -11,6 +11,7 @@ import Checkout from './pages/Detail.js';
 import ListItem from './pages/ListItem.js';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import UserProfile from './pages/UserProfile.js';
 import About from './pages/About';
 import Detail from './pages/Detail';
 import { StoreProvider } from './utils/globalState';
@@ -58,7 +59,8 @@ function App() {
                             <Route path='/about' element={<About />} />
                             {/* <Route path='/detail' element={<Detail />} /> */}
                             <Route path='/products/:id' element={<Detail />} />
-                        </Routes>
+                            <Route path='/UserProfile' element={<UserProfile />} />
+                </Routes>
                     </StoreProvider>
                 </div>
             </Router>
