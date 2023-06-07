@@ -108,7 +108,7 @@ function Detail() {
                     </p>
 
                     <img
-                        src={currentProduct.image} IMAGE HERE
+                        src={currentProduct.image}
                         alt={currentProduct.name}
                     />
                 </div>

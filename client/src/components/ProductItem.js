@@ -42,7 +42,7 @@ function ProductItem(item) {
             });
             idbPromise('cart', 'put', { ...item, purchaseQuantity: 1 });
         }
-    };
+    }
     // const { image, name, _id, price, quantity } = item;
 
     return (

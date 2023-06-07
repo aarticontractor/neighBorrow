@@ -2,6 +2,9 @@ import React from 'react';
 import { Modal, Card, CardContent, CardMedia, Typography, IconButton, Box, Button } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 
+
+
+
 const ProductModal = ({ product, open, onClose }) => {
     return (
         <Modal open={open} onClose={onClose}>
@@ -52,5 +55,6 @@ const ProductModal = ({ product, open, onClose }) => {
         </Modal>
     );
 }
+
 
 export default ProductModal;
