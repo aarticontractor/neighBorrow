@@ -7,7 +7,8 @@ import Auth from '../utils/auth';
 
 const Signup = () => {
   const [formState, setFormState] = useState({
-    username: '',
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
   });
@@ -29,7 +30,7 @@ const Signup = () => {
       const { data } = await addUser({
         variables: { ...formState },
       });
-
+      console.log("dat",data)
       Auth.login(data.addUser.token);
     } catch (e) {
       console.error(e);
@@ -51,10 +52,18 @@ const Signup = () => {
               <form onSubmit={handleFormSubmit}>
                 <input
                   className="form-input"
-                  placeholder="Your username"
-                  name="username"
+                  placeholder="First Name"
+                  name="firstName"
                   type="text"
-                  value={formState.name}
+                  value={formState.firstName}
+                  onChange={handleChange}
+                />
+                <input
+                  className="form-input"
+                  placeholder="Last Name"
+                  name="lastName"
+                  type="text"
+                  value={formState.lastName}
                   onChange={handleChange}
                 />
                 <input

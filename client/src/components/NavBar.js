@@ -24,6 +24,7 @@ function Nav() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const navigate = useNavigate();
     const { loading, error, data } = useQuery(GET_CATEGORIES);
+    const user = Auth.getUser();
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -46,7 +47,7 @@ function Nav() {
                         List an Item
                     </Button>
                     <Button color="inherit">
-                        Welcome, {Auth.getUsername()}
+                        Welcome, {user.firstName}
                     </Button>
                     <Button color="inherit" component={RouterLink} to="/about">
                         About Us
