@@ -8,7 +8,7 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import Checkout from './pages/Checkout.js';
-import UserPage from './pages/UserPage.js';
+import ListItem from './pages/ListItem.js';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 
@@ -44,7 +44,7 @@ function App() {
                 <NavBar />
                 <Routes>
                     <Route path='/' element={<Home />} />
-                    <Route path='/UserPage' element={<UserPage />} />
+                    <Route path='/listitem' element={<ListItem />} />
                     <Route path='/checkout' element={<Checkout />} />
                     <Route path='/Login' element={<Login />} />
                     <Route path='/Signup' element={<Signup />} />
