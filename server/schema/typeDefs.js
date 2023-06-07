@@ -56,7 +56,7 @@ extend type Query {
       lastName: String
       email: String
       password: String
-    )
+    ): User
     addProduct(
       name: String
       description: String
