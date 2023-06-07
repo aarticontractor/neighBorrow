@@ -15,6 +15,7 @@ import About from './pages/About';
 
 
 
+
 import NavBar from './components/NavBar';
 import Home from './pages/Home';
 
@@ -51,6 +52,7 @@ function App() {
                     <Route path='/Login' element={<Login />} />
                     <Route path='/Signup' element={<Signup />} />
                     <Route path='/about' element={<About />} />
+                    <Route path='/products/:id' element={<Checkout />} />
                 </Routes>
             </Router>
         </ApolloProvider>
