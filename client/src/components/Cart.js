@@ -4,7 +4,7 @@ import CartItem from './CartItem';
 import { useLazyQuery } from '@apollo/client';
 import { idbPromise } from '../utils/helpers';
 
-
+import './cart.css';
 import Auth from '../utils/auth';
 import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../utils/action';
 import { useStoreContext } from '../utils/globalState.js';
