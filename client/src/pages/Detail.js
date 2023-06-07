@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-
+// import { useSelector, useDispatch } from 'react-redux';
 import Cart from '../components/Cart';
 import { useStoreContext } from '../utils/globalState';
 import {
@@ -10,17 +10,17 @@ import {
     ADD_TO_CART,
     UPDATE_PRODUCTS,
 } from '../utils/action';
-import { QUERY_ALL_PRODUCTS } from '../utils/queries';
+import { QUERY_PRODUCTS } from '../utils/queries';
 import { idbPromise } from '../utils/helpers';
+import excited from '../assets/excited.jpeg';
 
 
 function Detail() {
     const [state, dispatch] = useStoreContext();
     const { id } = useParams();
-
     const [currentProduct, setCurrentProduct] = useState({});
 
-    const { loading, data } = useQuery(QUERY_ALL_PRODUCTS);
+    const { loading, data } = useQuery(QUERY_PRODUCTS);
 
     const { products, cart } = state;
 
@@ -52,37 +52,42 @@ function Detail() {
     }, [products, data, loading, dispatch, id]);
 
     const addToCart = () => {
-        const itemInCart = cart.find((cartItem) => cartItem._id === id);
-        if (itemInCart) {
-            dispatch({
-                type: UPDATE_CART_QUANTITY,
-                _id: id,
-                purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
-            });
-            idbPromise('cart', 'put', {
-                ...itemInCart,
-                purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
-            });
-        } else {
-            dispatch({
-                type: ADD_TO_CART,
-                product: { ...currentProduct, purchaseQuantity: 1 },
-            });
-            idbPromise('cart', 'put', { ...currentProduct, purchaseQuantity: 1 });
+        if (cart) {
+            const itemInCart = cart.find((cartItem) => cartItem._id === id);
+            if (itemInCart) {
+                dispatch({
+                    type: UPDATE_CART_QUANTITY,
+                    _id: id,
+                    purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
+                });
+                idbPromise('cart', 'put', {
+                    ...itemInCart,
+                    purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
+                });
+            } else {
+                dispatch({
+                    type: ADD_TO_CART,
+                    product: { ...currentProduct, purchaseQuantity: 1 },
+                });
+                idbPromise('cart', 'put', { ...currentProduct, purchaseQuantity: 1 });
+            }
         }
     };
 
     const removeFromCart = () => {
-        dispatch({
-            type: REMOVE_FROM_CART,
-            _id: currentProduct._id,
-        });
+        if (cart) {
+            dispatch({
+                type: REMOVE_FROM_CART,
+                _id: currentProduct._id,
+            });
 
-        idbPromise('cart', 'delete', { ...currentProduct });
+            idbPromise('cart', 'delete', { ...currentProduct });
+        }
     };
 
     return (
         <>
+            <h1>Your Shopping Cart</h1>
             {currentProduct && cart ? (
                 <div className="container my-1">
                     <Link to="/">← Back to Products</Link>
@@ -93,9 +98,9 @@ function Detail() {
 
                     <p>
                         <strong>Price:</strong>${currentProduct.price}{' '}
-                        <button onClick={addToCart}>Add to Cart</button>
+                        <button disabled={!cart.find((p) => p._id === currentProduct._id)} onClick={addToCart}>Add to Cart</button>
                         <button
-                            disabled={!cart.find((p) => p._id === currentProduct._id)}
+
                             onClick={removeFromCart}
                         >
                             Remove from Cart
@@ -103,7 +108,7 @@ function Detail() {
                     </p>
 
                     <img
-                        //src={} IMAGE HERE
+                        src={excited} IMAGE HERE
                         alt={currentProduct.name}
                     />
                 </div>
