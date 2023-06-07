@@ -2,11 +2,12 @@ import React, { useEffect } from 'react';
 import { Container, Grid, Typography, Card, CardContent, Avatar, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import anime from 'animejs';
+import member1 from '../aboutUs-imgs/Aarti.jpg'
+import member3 from '../aboutUs-imgs/Kaiden.JPG';
+import member4 from '../aboutUs-imgs/Amanda.jpg';
 
-const member1 = 'https://res.cloudinary.com/dpil3zvj3/image/upload/v1683738706/jamfolio/qwdflcleqets5psegxr1.jpg';
 const member2 = 'https://res.cloudinary.com/dpil3zvj3/image/upload/v1683738706/jamfolio/qwdflcleqets5psegxr1.jpg';
-const member3 = 'https://res.cloudinary.com/dpil3zvj3/image/upload/v1683738706/jamfolio/qwdflcleqets5psegxr1.jpg';
-const member4 = 'https://res.cloudinary.com/dpil3zvj3/image/upload/v1683738706/jamfolio/qwdflcleqets5psegxr1.jpg';
+
 
 const useStyles = makeStyles(theme => ({
     root: {
