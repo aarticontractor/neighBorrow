@@ -34,27 +34,30 @@ const Home = () => {
     };
 
     const handleSearch = () => {
-        let filtered = data.getProducts.filter(product => {
-            const nameMatch = product.name.toLowerCase().includes(search.toLowerCase());
-            const categoryMatch = location.state?.category
-                ? product.category.parent === location.state.category.parent && product.category.name === location.state.category.name
-                : true;
-            if (priceRange === 'All') {
-                return nameMatch && categoryMatch;
-            } else {
-                const [minPrice, maxPrice] = priceRange.split('-');
-                const inPriceRange = product.price >= Number(minPrice) && (!maxPrice || product.price <= Number(maxPrice));
-                return nameMatch && inPriceRange && categoryMatch;
-            }
-        });
-        setPage(1);
-        setFilteredProducts(filtered);
+        if (data) {
+            let filtered = data.getProducts.filter(product => {
+                const nameMatch = product.name.toLowerCase().includes(search.toLowerCase());
+                const categoryMatch = location.state?.category
+                    ? product.category.parent === location.state.category.parent && product.category.name === location.state.category.name
+                    : true;
+                if (priceRange === 'All') {
+                    return nameMatch && categoryMatch;
+                } else {
+                    const [minPrice, maxPrice] = priceRange.split('-');
+                    const inPriceRange = product.price >= Number(minPrice) && (!maxPrice || product.price <= Number(maxPrice));
+                    return nameMatch && inPriceRange && categoryMatch;
+                }
+            });
+            setPage(1);
+            setFilteredProducts(filtered);
+        }
     };
 
     React.useEffect(() => {
         if (data) {
             handleSearch();
         }
+
     }, [data, search, priceRange, location.state?.category]);
 
     if (loading) return 'Loading...';
@@ -103,6 +106,6 @@ const Home = () => {
             )}
         </Container>
     );
-}
+};
 
 export default Home;

@@ -7,16 +7,19 @@ import {
     createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import Checkout from './pages/Checkout.js';
+import Checkout from './pages/Detail.js';
 import ListItem from './pages/ListItem.js';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import About from './pages/About';
+import Detail from './pages/Detail';
+import { StoreProvider } from './utils/globalState';
 
 
 
 import NavBar from './components/NavBar';
 import Home from './pages/Home';
+// import { DefaultDeserializer } from 'v8';
 
 
 
@@ -43,15 +46,21 @@ function App() {
     return (
         <ApolloProvider client={client}>
             <Router>
-                <NavBar />
-                <Routes>
-                    <Route path='/' element={<Home />} />
-                    <Route path='/listitem' element={<ListItem />} />
-                    <Route path='/checkout' element={<Checkout />} />
-                    <Route path='/Login' element={<Login />} />
-                    <Route path='/Signup' element={<Signup />} />
-                    <Route path='/about' element={<About />} />
-                </Routes>
+                <div>
+                    <StoreProvider>
+                        <NavBar />
+                        <Routes>
+                            <Route path='/' element={<Home />} />
+                            <Route path='/listitem' element={<ListItem />} />
+                            <Route path='/checkout' element={<Checkout />} />
+                            <Route path='/Login' element={<Login />} />
+                            <Route path='/Signup' element={<Signup />} />
+                            <Route path='/about' element={<About />} />
+                            {/* <Route path='/detail' element={<Detail />} /> */}
+                            <Route path='/products/:id' element={<Detail />} />
+                        </Routes>
+                    </StoreProvider>
+                </div>
             </Router>
         </ApolloProvider>
     );
