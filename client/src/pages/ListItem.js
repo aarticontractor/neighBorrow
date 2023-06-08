@@ -11,6 +11,7 @@ import { useQuery } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import animationData from '../assets/uploading.json';
 import Lottie from 'react-lottie';
+import Auth from '../utils/auth';
 
 const REACT_APP_CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dlfgz7bn4/image/upload"
 const REACT_APP_CLOUDINARY_UPLOAD_PRESET = "neighborrow"
@@ -46,6 +47,7 @@ const useStyles = makeStyles(theme => ({
 
 const ListProduct = () => {
     const classes = useStyles();
+    const user = Auth.getUser();
     const navigate = useNavigate();
     const [uploading, setUploading] = useState(false);
     const [imageFile, setImageFile] = useState(null);
@@ -57,6 +59,7 @@ const ListProduct = () => {
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [addProduct] = useMutation(ADD_PRODUCT);
     const { loading, error, data: categoryData } = useQuery(GET_CATEGORIES);
+
 
     if (loading) return 'Loading...';
     if (error) return `Error! ${error.message}`;
@@ -89,7 +92,7 @@ const ListProduct = () => {
                         image: imageUrl,
                         price,
                         categoryId: category,
-                        userId: '647d20f7c8d4d513f9ebf443',
+                        userId: user._id,
                     },
                 });
                 setUploading(true);
