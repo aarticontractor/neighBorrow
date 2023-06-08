@@ -47,7 +47,6 @@ const useStyles = makeStyles(theme => ({
 
 const ListProduct = () => {
     const classes = useStyles();
-    const user = Auth.getUser();
     const navigate = useNavigate();
     const [uploading, setUploading] = useState(false);
     const [imageFile, setImageFile] = useState(null);
