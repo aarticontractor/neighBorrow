@@ -18,6 +18,7 @@ const UserProfile = () => {
     firstName: userObj.firstName,
     lastName: userObj.lastName,
     userId: userObj._id,
+    email: userObj.email,
     avatar: ''
   });
   const [state ] = useStoreContext();
@@ -108,6 +109,7 @@ const UserProfile = () => {
             spacing={2}
           >
             <Typography variant="h4">{user.firstName} {user.lastName}</Typography>
+            <Typography>Email: {user.email}</Typography>
             <Typography>User ID: {user.userId}</Typography>
           </Stack>
           {/* <Stack
