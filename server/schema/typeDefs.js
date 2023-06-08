@@ -14,6 +14,8 @@ const typeDefs = gql`
     price: Float
     category: Category
     user: User
+    start_date: String
+    end_date: String
   }
   type Order {
     _id: ID
@@ -64,6 +66,8 @@ extend type Query {
       price: Float
       categoryId: ID
       userId: ID
+      start_date: String
+      end_date: String
     ): Product
 
     addCategory(

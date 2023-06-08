@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const productSchema = new Schema({
 
-    user: { 
+    user: {
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true
@@ -27,6 +27,14 @@ const productSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Category',
         required: true
+    },
+    start_date: {
+        type: Date,
+        required: true,
+    },
+    end_date: {
+        type: Date,
+        required: true,
     }
 });
 
