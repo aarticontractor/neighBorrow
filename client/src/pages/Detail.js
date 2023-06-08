@@ -16,66 +16,66 @@ import { idbPromise } from '../utils/helpers';
 
 
 function Detail() {
-    function Detail() {
-        const state = useSelector((state) => {
-            return state;
-        });
-        const { id } = useParams();
 
-        const [currentProduct, setCurrentProduct] = useState({});
-        const dispatch = useDispatch();
-        const { loading, data } = useQuery(QUERY_PRODUCTS);
+    const state = useSelector((state) => {
+        return state;
+    });
+    const { id } = useParams();
 
-        const { products, cart } = state;
+    const [currentProduct, setCurrentProduct] = useState({});
+    const dispatch = useDispatch();
+    const { loading, data } = useQuery(QUERY_PRODUCTS);
 
-        useEffect(() => {
+    const { products, cart } = state;
 
-            if (products.length) {
-                setCurrentProduct(products.find((product) => product._id === id));
-            }
-            // retrieved from server
-            else if (data) {
+    useEffect(() => {
+
+        if (products.length) {
+            setCurrentProduct(products.find((product) => product._id === id));
+        }
+        // retrieved from server
+        else if (data) {
+            dispatch({
+                type: UPDATE_PRODUCTS,
+                products: data.products,
+            });
+
+            data.products.forEach((product) => {
+                idbPromise('products', 'put', product);
+            });
+        }
+        // get cache from idb
+        else if (!loading) {
+            idbPromise('products', 'get').then((indexedProducts) => {
                 dispatch({
                     type: UPDATE_PRODUCTS,
-                    products: data.products,
+                    products: indexedProducts,
                 });
-
-                data.products.forEach((product) => {
-                    idbPromise('products', 'put', product);
-                });
-            }
-            // get cache from idb
-            else if (!loading) {
-                idbPromise('products', 'get').then((indexedProducts) => {
-                    dispatch({
-                        type: UPDATE_PRODUCTS,
-                        products: indexedProducts,
-                    });
-                });
-            }
-        }, [products, data, loading, dispatch, id]);
-
-        const addToCart = () => {
-
-            const itemInCart = cart.find((cartItem) => cartItem._id === id);
-            if (itemInCart) {
-                dispatch({
-                    type: UPDATE_CART_QUANTITY,
-                    _id: id,
-                    purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
-                });
-                idbPromise('cart', 'put', {
-                    ...itemInCart,
-                    purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
-                });
-            } else {
-                dispatch({
-                    type: ADD_TO_CART,
-                    product: { ...currentProduct, purchaseQuantity: 1 },
-                });
-                idbPromise('cart', 'put', { ...currentProduct, purchaseQuantity: 1 });
-            }
+            });
         }
+    }, [products, data, loading, dispatch, id]);
+
+    const addToCart = () => {
+
+        const itemInCart = cart.find((cartItem) => cartItem._id === id);
+        if (itemInCart) {
+            dispatch({
+                type: UPDATE_CART_QUANTITY,
+                _id: id,
+                purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
+            });
+            idbPromise('cart', 'put', {
+                ...itemInCart,
+                purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
+            });
+        } else {
+            dispatch({
+                type: ADD_TO_CART,
+                product: { ...currentProduct, purchaseQuantity: 1 },
+            });
+            idbPromise('cart', 'put', { ...currentProduct, purchaseQuantity: 1 });
+        }
+
     };
 
     const removeFromCart = () => {
