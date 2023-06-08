@@ -8,7 +8,7 @@ import ProductModal from '../components/ProductModal';
 import { GET_ALL_PRODUCTS } from '../utils/queries';
 import { useLocation } from 'react-router-dom';
 
-const PRODUCTS_PER_PAGE = 10; // set the number of products per page
+const PRODUCTS_PER_PAGE = 8; // set the number of products per page
 
 const Home = () => {
     const [selectedProduct, setSelectedProduct] = React.useState(null);

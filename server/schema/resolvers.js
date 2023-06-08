@@ -74,14 +74,17 @@ const resolvers = {
             return { token, user };
         },
 
-        addProduct: async (_, { name, description, image, price, categoryId, userId }) => {
+        addProduct: async (_, { name, description, image, price, categoryId, userId, start_date, end_date }) => {
+
             const newProduct = new Product({
                 name,
                 description,
                 image,
                 price,
                 category: categoryId,
-                user: userId
+                user: userId,
+                start_date,
+                end_date,
             });
 
             return await newProduct.save();
