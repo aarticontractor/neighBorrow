@@ -55,6 +55,10 @@ const ProductCard = ({ product }) => {
         });
     }, []);
 
+    const addToCartHandler = () => {
+        // Implement your add to cart logic here
+    };
+
     return (
         <Card>
             {/* <CardActionArea onClick={() => onProductClick(product)}> */}
@@ -82,7 +86,7 @@ const ProductCard = ({ product }) => {
             </Link>
         </Card>
     );
-}
+};
 
 
 export default ProductCard;
