@@ -4,8 +4,10 @@ import CloseIcon from '@material-ui/icons/Close';
 import { idbPromise } from "../utils/helpers";
 import { useSelector, useDispatch } from 'react-redux';
 import { ADD_TO_CART, UPDATE_CART_QUANTITY } from "../utils/action";
+import { useNavigate } from 'react-router-dom';
 
 const ProductModal = ({ product, open, onClose }) => {
+    const navigate = useNavigate();
     const state = useSelector((state) => {
         return state;
     });
@@ -13,7 +15,11 @@ const ProductModal = ({ product, open, onClose }) => {
     const { cart } = state;
     const { image, name, _id, price } = product;
 
+    const navigateToCart = () => {
+        navigate('/Detail');
+    }
     const addToCart = () => {
+
         const itemInCart = cart.find((cartItem) => cartItem._id === _id);
 
         if (itemInCart) {
@@ -79,7 +85,7 @@ const ProductModal = ({ product, open, onClose }) => {
                             {/* {product.description} */}
                         </Typography>
                     </CardContent>
-                    <Button onClick={addToCart} variant="contained" color="primary">
+                    <Button onClick={() => { addToCart(); navigateToCart(); }} variant="contained" color="primary">
                         Add to Cart
                     </Button>
                 </Card>
@@ -89,3 +95,4 @@ const ProductModal = ({ product, open, onClose }) => {
 };
 
 export default ProductModal;
+

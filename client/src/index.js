@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { StoreProvider } from './utils/globalState.js';
+// import { StoreProvider } from './utils/globalState.js';
+import './index.css';
 
 ReactDOM.render(
-    <StoreProvider>
+    <React.StrictMode>
         <App />
-    </StoreProvider>,
+    </React.StrictMode>,
     document.getElementById('root')
 );
