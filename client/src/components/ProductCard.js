@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Card, CardActionArea, CardContent, CardMedia, Typography, Button } from '@material-ui/core';
 import anime from 'animejs';
 
-const ProductCard = ({ product, onProductClick }) => {
+const ProductCard = ({ product, onProductClick, disabled }) => {
     const nameRef = useRef(null);
     const priceRef = useRef(null);
 
@@ -15,6 +15,10 @@ const ProductCard = ({ product, onProductClick }) => {
             easing: 'spring(1, 80, 10, 0)'
         });
     }, []);
+
+    const addToCartHandler = () => {
+        // Implement your add to cart logic here
+    };
 
     return (
         <Card>
@@ -35,9 +39,11 @@ const ProductCard = ({ product, onProductClick }) => {
                     </Typography>
                 </CardContent>
             </CardActionArea>
-            <Button variant="contained" color="primary">Add to Cart</Button>
+            <Button disabled={disabled} onClick={addToCartHandler}>
+                {disabled ? 'Unavailable' : 'Add to Cart'}
+            </Button>
         </Card>
     );
-}
+};
 
 export default ProductCard;
