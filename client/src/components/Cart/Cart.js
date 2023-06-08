@@ -22,9 +22,17 @@ const Cart = () => {
     const [currentProduct, setCurrentProduct] = useState({});
     const [state, dispatch] = useContext(useStoreContext());
 
-    const [getCheckout, { data: checkoutData }] = useLazyQuery(QUERY_CHECKOUT);
+    const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
+    const { loading } = useQuery(QUERY_PRODUCTS);
 
     const { products, cart } = state;
+    useEffect(() => {
+        if (data) {
+            stripePromise.then((res) => {
+                res.redirectToCheckout({ sessionId: data.checkout.session });
+            });
+        }
+    }, [data]);
 
     useEffect(() => {
         if (products.length) {
@@ -78,13 +86,13 @@ const Cart = () => {
         idbPromise('cart', 'delete', { ...currentProduct });
     };
 
-    useEffect(() => {
-        if (checkoutData) {
-            stripePromise.then((res) => {
-                res.redirectToCheckout({ sessionId: checkoutData.checkout.session });
-            });
-        }
-    }, [checkoutData]);
+    // useEffect(() => {
+    //     if (checkoutData) {
+    //         stripePromise.then((res) => {
+    //             res.redirectToCheckout({ sessionId: checkoutData.checkout.session });
+    //         });
+    //     }
+    // }, [checkoutData]);
 
     useEffect(() => {
         async function getCart() {
@@ -108,8 +116,12 @@ const Cart = () => {
                 productIds.push(item._id);
             }
 
-        })
+        });
+        getCheckout({
+            variables: { products: productIds },
+        });
     }
+
 
     function calculateTotal() {
         let sum = 0;
@@ -161,3 +173,4 @@ const Cart = () => {
         </div>
     );
 }
+export default Cart;
