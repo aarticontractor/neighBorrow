@@ -1,11 +1,40 @@
 import React from 'react';
 import { Modal, Card, CardContent, CardMedia, Typography, IconButton, Box, Button } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-
-
-
+import { idbPromise } from "../utils/helpers";
+import { useSelector, useDispatch } from 'react-redux';
+import { ADD_TO_CART, UPDATE_CART_QUANTITY } from "../utils/action";
 
 const ProductModal = ({ product, open, onClose }) => {
+    const state = useSelector((state) => {
+        return state;
+    });
+    const dispatch = useDispatch();
+    const { cart } = state;
+    const { image, name, _id, price } = product;
+
+    const addToCart = () => {
+        const itemInCart = cart.find((cartItem) => cartItem._id === _id);
+
+        if (itemInCart) {
+            dispatch({
+                type: UPDATE_CART_QUANTITY,
+                _id: _id,
+                purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1
+            });
+            idbPromise('cart', 'put', {
+                ...itemInCart,
+                purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1
+            });
+        } else {
+            dispatch({
+                type: ADD_TO_CART,
+                product: { ...product, purchaseQuantity: 1 }
+            });
+            idbPromise('cart', 'put', { ...product, purchaseQuantity: 1 });
+        }
+    };
+
     return (
         <Modal open={open} onClose={onClose}>
             <Box
@@ -19,8 +48,8 @@ const ProductModal = ({ product, open, onClose }) => {
             >
                 <Card
                     sx={{
-                        maxWidth: '80%', // Set to the maximum size you want your modal to be. Adjust as needed.
-                        maxHeight: '11180vh', // Set to the maximum size you want your modal to be. Adjust as needed.
+                        maxWidth: '80%',
+                        maxHeight: '80vh',
                         overflowY: 'auto',
                         position: 'relative',
                         bgcolor: 'background.paper',
@@ -33,28 +62,30 @@ const ProductModal = ({ product, open, onClose }) => {
                     </IconButton>
                     <CardMedia
                         component="img"
-                        alt={product.name}
+                        alt={name}
                         height="500"
-                        image={product.image}
-                        title={product.name}
+                        image={image}
+                        title={name}
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
-                            {product.name}
+                            {name}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            ${product.price}
+                            ${price}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            {product.description}
+                            <h1>test</h1>
+                            {/* {product.description} */}
                         </Typography>
                     </CardContent>
-                    <Button variant="contained" color="primary">Add to Cart</Button>
+                    <Button onClick={addToCart} variant="contained" color="primary">
+                        Add to Cart
+                    </Button>
                 </Card>
             </Box>
         </Modal>
     );
-}
-
+};
 
 export default ProductModal;
