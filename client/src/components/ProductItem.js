@@ -6,14 +6,21 @@ import { pluralize } from "../../utils/helpers"
 import { ADD_TO_CART, UPDATE_CART_QUANTITY } from "../utils/action";
 import { idbPromise } from "../utils/helpers";
 import { useSelector, useDispatch } from 'react-redux';
+import { Button } from '@material-ui/core';
+import { useNavigate } from 'react-router-dom';
 
 
 function ProductItem(item) {
+    const navigate = useNavigate();
     const state = useSelector((state) => {
         return state;
     });
     const dispatch = useDispatch();
     const { cart } = state;
+    const navigateToCart = () => {
+        console.log('test');
+        navigate('/Detail');
+    }
 
 
     const addToCart = () => {
@@ -52,7 +59,9 @@ function ProductItem(item) {
                 <div>{quantity} {pluralize("item", quantity)} in stock</div>
                 <span>${price}</span>
             </div>
-            <button onClick={addToCart}>Add to cart</button>
+            <Button onClick={() => { addToCart(); navigateToCart(); }} variant="contained" color="primary">
+                Add to Cart
+            </Button>
         </div>
     );
 }
