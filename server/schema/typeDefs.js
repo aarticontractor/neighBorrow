@@ -27,6 +27,7 @@ const typeDefs = gql`
     firstName: String
     lastName: String
     email: String
+    image: String
   }
   type Auth {
     token: ID
@@ -51,6 +52,7 @@ extend type Query {
       lastName: String!
       email: String!
       password: String!
+      image: String
     ): Auth
   
     updateUser(
