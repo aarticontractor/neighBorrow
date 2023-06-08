@@ -28,6 +28,7 @@ export const GET_ALL_PRODUCTS = gql`
       name
       price
       user {
+        _id
         email
         firstName
         lastName
