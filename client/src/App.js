@@ -14,9 +14,9 @@ import Signup from './pages/Signup';
 import UserProfile from './pages/UserProfile.js';
 import About from './pages/About';
 import Detail from './pages/Detail';
-import { StoreProvider } from './utils/globalState';
 
-
+// import { Provider } from 'react-redux';
+import { StoreProvider } from './utils/globalState.js';
 
 import NavBar from './components/NavBar';
 import Home from './pages/Home';
@@ -27,7 +27,6 @@ import Home from './pages/Home';
 const httpLink = createHttpLink({
     uri: '/graphql',
 });
-
 const authLink = setContext((_, { headers }) => {
     const token = localStorage.getItem('id_token');
     return {
@@ -61,10 +60,10 @@ function App() {
                             <Route path='/products/:id' element={<Detail />} />
                             <Route path='/UserProfile' element={<UserProfile />} />
                         </Routes>
-                    </StoreProvider>
-                </div>
-            </Router>
-        </ApolloProvider>
+                    </StoreProvider >
+                </div >
+            </Router >
+        </ApolloProvider >
     );
 }
 

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import { useSelector, useDispatch } from 'react-redux';
+// import { useSelector, useDispatch } from 'react-redux';
 import Cart from '../components/Cart/Cart';
-// import { useStoreContext } from '../utils/globalState';
+import { useStoreContext } from '../utils/globalState';
 import {
     REMOVE_FROM_CART,
     UPDATE_CART_QUANTITY,
@@ -17,16 +17,14 @@ import { idbPromise } from '../utils/helpers';
 
 function Detail() {
 
-    const state = useSelector((state) => {
-        return state;
-    });
-    const { id } = useParams();
+    const [reduxState, dispatch] = useStoreContext();
+
 
     const [currentProduct, setCurrentProduct] = useState({});
-    const dispatch = useDispatch();
+
     const { loading, data } = useQuery(QUERY_PRODUCTS);
 
-    const { products, cart } = state;
+    const { products, cart } = reduxState;
 
     useEffect(() => {
 
