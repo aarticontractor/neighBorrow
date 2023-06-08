@@ -37,6 +37,7 @@ const typeDefs = gql`
 type Query {
   getCategory: [Category]
   getUsers: [User]
+  
   getProducts: [Product]
   getProductByID(productId: ID!): Product
   order(_id: ID!): Order
@@ -45,6 +46,8 @@ type Query {
 extend type Query {
   getProducts: [Product]
   getProductByID(productId: ID!): Product
+  getUserByID(userId: ID!): User
+  
 }
   type Mutation {
     addUser(
@@ -60,6 +63,7 @@ extend type Query {
       lastName: String
       email: String
       password: String
+      image: String
     ): User
     addProduct(
       name: String
@@ -71,6 +75,7 @@ extend type Query {
       start_date: String
       end_date: String
     ): Product
+    updateUserAvatar(image: String!, userId: ID!): User
 
     addCategory(
       name: String!

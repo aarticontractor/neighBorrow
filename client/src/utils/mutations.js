@@ -52,3 +52,12 @@ export const ADD_PRODUCT = gql`
     }
   }
 `;
+
+export const UPDATE_USER_AVATAR = gql`
+  mutation updateUserAvatar($image: String!, $userId: ID!) {
+    updateUserAvatar(image: $image, userId: $userId) {
+      _id
+      image
+    }
+  }
+`;
