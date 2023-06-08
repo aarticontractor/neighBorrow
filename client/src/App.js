@@ -1,5 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {
+    ApolloClient,
+    InMemoryCache,
+    ApolloProvider,
+    createHttpLink,
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import Checkout from './pages/Detail.js';
 import ListItem from './pages/ListItem.js';
 import Login from './pages/Login';
@@ -7,6 +14,7 @@ import Signup from './pages/Signup';
 import UserProfile from './pages/UserProfile.js';
 import About from './pages/About';
 import Detail from './pages/Detail';
+<<<<<<< HEAD
 import { setContext } from '@apollo/client/link/context';
 // import { Provider } from 'react-redux';
 import { StoreProvider } from './utils/globalState.js';
@@ -16,9 +24,21 @@ import {
     ApolloProvider,
     createHttpLink
 } from '@apollo/client';
+=======
+import { StoreProvider } from './utils/globalState';
+
+
+
+>>>>>>> main
 import NavBar from './components/NavBar';
 import Home from './pages/Home';
+// import { DefaultDeserializer } from 'v8';
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> main
 const httpLink = createHttpLink({
     uri: '/graphql',
 });
@@ -40,6 +60,20 @@ const client = new ApolloClient({
 
 
 
+const authLink = setContext((_, { headers }) => {
+    const token = localStorage.getItem('id_token');
+    return {
+        headers: {
+            ...headers,
+            authorization: token ? `Bearer ${token}` : '',
+        },
+    };
+});
+
+const client = new ApolloClient({
+    link: authLink.concat(httpLink),
+    cache: new InMemoryCache(),
+});
 
 function App() {
     return (
@@ -55,10 +89,14 @@ function App() {
                             <Route path='/Login' element={<Login />} />
                             <Route path='/Signup' element={<Signup />} />
                             <Route path='/about' element={<About />} />
+                            {/* <Route path='/detail' element={<Detail />} /> */}
                             <Route path='/products/:id' element={<Detail />} />
                             <Route path='/UserProfile' element={<UserProfile />} />
                         </Routes>
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
                     </StoreProvider>
                 </div>
             </Router>

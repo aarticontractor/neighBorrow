@@ -11,6 +11,9 @@ import { useQuery } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import animationData from '../assets/uploading.json';
 import Lottie from 'react-lottie';
+import Auth from '../utils/auth';
+import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
 
 const REACT_APP_CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dlfgz7bn4/image/upload"
 const REACT_APP_CLOUDINARY_UPLOAD_PRESET = "neighborrow"
@@ -57,9 +60,14 @@ const ListProduct = () => {
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [addProduct] = useMutation(ADD_PRODUCT);
     const { loading, error, data: categoryData } = useQuery(GET_CATEGORIES);
+    const userObj = Auth.getUser();
+    const [startDate, setStartDate] = useState(null);
+    const [endDate, setEndDate] = useState(null);
+
 
     if (loading) return 'Loading...';
     if (error) return `Error! ${error.message}`;
+
 
     const handleImageChange = async (event) => {
         const file = event.target.files[0];
@@ -78,9 +86,15 @@ const ListProduct = () => {
             console.error('Error uploading image:', error);
         }
     };
+    const formatDate = (date) => {
+        const yyyy = date.getFullYear();
+        const mm = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based.
+        const dd = String(date.getDate()).padStart(2, '0');
+        return `${yyyy}-${mm}-${dd}`;
+    };
 
     const handleListProduct = async () => {
-        if (imageUrl && title && category && price) {
+        if (imageUrl && title && category && price && startDate && endDate) {
             try {
                 const { data } = await addProduct({
                     variables: {
@@ -89,9 +103,12 @@ const ListProduct = () => {
                         image: imageUrl,
                         price,
                         categoryId: category,
-                        userId: '647d20f7c8d4d513f9ebf443',
+                        userId: userObj._id,
+                        start_date: String(formatDate(startDate)),
+                        end_date: String(formatDate(endDate)),
                     },
                 });
+
                 setUploading(true);
                 console.log('Product added:', data.addProduct);
 
@@ -197,6 +214,34 @@ const ListProduct = () => {
                         <Grid item xs={12} sm={6}>
                             <Paper className={classes.paper}>
                                 <Typography variant="h4" gutterBottom>
+                                    Availability
+                                </Typography>
+                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                    <DatePicker
+                                        label="Start Date"
+                                        value={startDate}
+                                        onChange={setStartDate}
+                                        format="MM/dd/yyyy"
+                                        className={classes.formField}
+                                        fullWidth
+                                        required
+                                    />
+                                    <DatePicker
+                                        label="End Date"
+                                        value={endDate}
+                                        onChange={setEndDate}
+                                        format="MM/dd/yyyy"
+                                        className={classes.formField}
+                                        fullWidth
+                                        required
+                                    />
+                                </MuiPickersUtilsProvider>
+                            </Paper>
+                        </Grid>
+
+                        <Grid item xs={12} sm={6}>
+                            <Paper className={classes.paper}>
+                                <Typography variant="h4" gutterBottom>
                                     Pricing - $
                                 </Typography>
                                 <TextField
@@ -213,7 +258,13 @@ const ListProduct = () => {
                         </Grid>
 
                         <Grid item xs={12} className={classes.formField}>
-                            <Button variant="contained" color="primary" fullWidth onClick={handleListProduct}>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                fullWidth
+                                onClick={handleListProduct}
+                                disabled={!(imageUrl && title && category && price && startDate && endDate)}
+                            >
                                 List Item
                             </Button>
                         </Grid>
