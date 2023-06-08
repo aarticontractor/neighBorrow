@@ -15,14 +15,10 @@ import UserProfile from './pages/UserProfile.js';
 import About from './pages/About';
 import Cart from './components/Cart/Cart.js'
 import ProductCard from './components/ProductCard.js';
-
-// import { Provider } from 'react-redux';
 import { StoreProvider } from './utils/globalState.js';
-
 import NavBar from './components/NavBar';
 import Home from './pages/Home';
-// import { DefaultDeserializer } from 'v8';
-
+// import { Provider } from 'react-redux';
 
 
 const httpLink = createHttpLink({
