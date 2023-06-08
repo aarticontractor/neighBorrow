@@ -15,5 +15,9 @@
     "license": "ISC",
     "devDependencies": {
         "concurrently": "^5.1.0"
+    },
+    "dependencies": {
+        "cloudinary-react": "^1.8.1",
+        "react-lottie": "^1.2.3"
     }
 }

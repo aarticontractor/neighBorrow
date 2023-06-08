@@ -59,10 +59,12 @@ const ListProduct = () => {
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [addProduct] = useMutation(ADD_PRODUCT);
     const { loading, error, data: categoryData } = useQuery(GET_CATEGORIES);
+    const userObj = Auth.getUser();
 
 
     if (loading) return 'Loading...';
     if (error) return `Error! ${error.message}`;
+
 
     const handleImageChange = async (event) => {
         const file = event.target.files[0];
@@ -92,7 +94,9 @@ const ListProduct = () => {
                         image: imageUrl,
                         price,
                         categoryId: category,
-                        userId: user._id,
+
+                        userId: userObj._id
+
                     },
                 });
                 setUploading(true);
