@@ -25,6 +25,8 @@ export const GET_ALL_PRODUCTS = gql`
       }
       description
       image
+      start_date
+      end_date
       name
       price
       user {

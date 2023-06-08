@@ -7,6 +7,8 @@ import ProductCard from '../components/ProductCard';
 import ProductModal from '../components/ProductModal';
 import { GET_ALL_PRODUCTS } from '../utils/queries';
 import { useLocation } from 'react-router-dom';
+import moment from 'moment';
+import Auth from '../utils/auth';
 
 const PRODUCTS_PER_PAGE = 8; // set the number of products per page
 
@@ -33,25 +35,44 @@ const Home = () => {
         setPage(value);
     };
 
+    const checkDate = (start_date, end_date) => {
+
+        const startDate = moment.unix(start_date / 1000);
+        const endDate = moment.unix(end_date / 1000);
+        const today = moment().startOf('day');
+        console.log(startDate);
+        console.log(endDate);
+        console.log(today);
+
+        return startDate <= today && today <= endDate;
+    };
+
     const handleSearch = () => {
         if (data) {
             let filtered = data.getProducts.filter(product => {
                 const nameMatch = product.name.toLowerCase().includes(search.toLowerCase());
-                const categoryMatch = location.state?.category
-                    ? product.category.parent === location.state.category.parent && product.category.name === location.state.category.name
-                    : true;
+                const categoryMatch =
+                    location.state?.category
+                        ? product.category.parent === location.state.category.parent &&
+                        product.category.name === location.state.category.name
+                        : true;
+
                 if (priceRange === 'All') {
                     return nameMatch && categoryMatch;
                 } else {
                     const [minPrice, maxPrice] = priceRange.split('-');
-                    const inPriceRange = product.price >= Number(minPrice) && (!maxPrice || product.price <= Number(maxPrice));
-                    return nameMatch && inPriceRange && categoryMatch;
+                    const inPriceRange =
+                        product.price >= Number(minPrice) &&
+                        (!maxPrice || product.price <= Number(maxPrice));
+                    const inDateRange = checkDate(product.start_date, product.end_date);
+                    return nameMatch && inPriceRange && categoryMatch && inDateRange;
                 }
             });
             setPage(1);
             setFilteredProducts(filtered);
         }
     };
+
 
     React.useEffect(() => {
         if (data) {
@@ -87,7 +108,11 @@ const Home = () => {
             <Grid container spacing={3}>
                 {paginatedProducts.map(product => (
                     <Grid item xs={12} sm={6} md={3} key={product._id}>
-                        <ProductCard product={product} onProductClick={handleProductClick} />
+                        <ProductCard
+                            product={product}
+                            onProductClick={handleProductClick}
+                            disabled={!checkDate(product.start_date, product.end_date) || !Auth.loggedIn()}
+                        />
                     </Grid>
                 ))}
             </Grid>
@@ -102,7 +127,6 @@ const Home = () => {
                     product={selectedProduct}
                     open={isModalOpen}
                     onClose={handleModalClose}
-
                 />
             )}
         </Container>
