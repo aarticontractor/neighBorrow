@@ -12,6 +12,7 @@ import { QUERY_CHECKOUT } from '../../utils/queries.js';
 // import { useSelector, useDispatch } from 'react-redux';
 import { useStoreContext } from '../../utils/globalState.js';
 
+
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
 const Cart = () => {

@@ -5,9 +5,9 @@ import { pluralize } from "../../utils/helpers"
 // import { useStoreContext } from "../../utils/globalState";
 import { ADD_TO_CART, UPDATE_CART_QUANTITY } from "../utils/action";
 import { idbPromise } from "../utils/helpers";
-import { useSelector, useDispatch } from 'react-redux';
+
 import { Button } from '@material-ui/core';
-import { useNavigate } from 'react-router-dom';
+
 
 
 function ProductItem(item) {
@@ -15,14 +15,14 @@ function ProductItem(item) {
     const state = useSelector((state) => {
         return state;
     });
-    const dispatch = useDispatch();
-    const { cart } = state;
+
     const navigateToCart = () => {
         console.log('test');
         navigate('/Detail');
     }
 
 
+    const { cart } = state;
     const addToCart = () => {
         const itemInCart = cart.find((cartItem) => cartItem._id === _id);
 
@@ -48,10 +48,13 @@ function ProductItem(item) {
 
     return (
         <div className="productCard">
-            <Link to={`/products/${_id}`}>
+            {/* <Link to={`/products/${_id}`}> */}
+            <Link to={'/Detail'}>
+
                 <img
                     alt={name}
                     src={`/images/${image}`}
+
                 />
                 <p>{name}</p>
             </Link>
@@ -59,9 +62,7 @@ function ProductItem(item) {
                 <div>{quantity} {pluralize("item", quantity)} in stock</div>
                 <span>${price}</span>
             </div>
-            <Button onClick={() => { addToCart(); navigateToCart(); }} variant="contained" color="primary">
-                Add to Cart
-            </Button>
+
         </div>
     );
 }

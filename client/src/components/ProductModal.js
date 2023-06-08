@@ -1,45 +1,46 @@
 import React from 'react';
-import { Modal, Card, CardContent, CardMedia, Typography, IconButton, Box, Button } from '@material-ui/core';
+import { Modal, Card, CardContent, CardMedia, Typography, IconButton, Box } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import { idbPromise } from "../utils/helpers";
-import { useSelector, useDispatch } from 'react-redux';
-import { ADD_TO_CART, UPDATE_CART_QUANTITY } from "../utils/action";
-import { useNavigate } from 'react-router-dom';
+
+// import { useSelector, useDispatch } from 'react-redux';
+
+// import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const ProductModal = ({ product, open, onClose }) => {
-    const navigate = useNavigate();
-    const state = useSelector((state) => {
-        return state;
-    });
-    const dispatch = useDispatch();
-    const { cart } = state;
-    const { image, name, _id, price } = product;
+    // const navigate = useNavigate();
+    // const state = useSelector((state) => {
+    // return state;
 
-    const navigateToCart = () => {
-        navigate('/Detail');
-    }
-    const addToCart = () => {
+    // const dispatch = useDispatch();
+    // const { cart } = state;
+    const { image, name, price } = product;
 
-        const itemInCart = cart.find((cartItem) => cartItem._id === _id);
+    // const navigateToCart = () => {
+    // navigate('/Detail');
 
-        if (itemInCart) {
-            dispatch({
-                type: UPDATE_CART_QUANTITY,
-                _id: _id,
-                purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1
-            });
-            idbPromise('cart', 'put', {
-                ...itemInCart,
-                purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1
-            });
-        } else {
-            dispatch({
-                type: ADD_TO_CART,
-                product: { ...product, purchaseQuantity: 1 }
-            });
-            idbPromise('cart', 'put', { ...product, purchaseQuantity: 1 });
-        }
-    };
+    // const addToCart = () => {
+
+    //     const itemInCart = cart.find((cartItem) => cartItem._id === _id);
+
+    //     if (itemInCart) {
+    //         dispatch({
+    //             type: UPDATE_CART_QUANTITY,
+    //             _id: _id,
+    //             purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1
+    //         });
+    //         idbPromise('cart', 'put', {
+    //             ...itemInCart,
+    //             purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1
+    //         });
+    //     } else {
+    //         dispatch({
+    //             type: ADD_TO_CART,
+    //             product: { ...product, purchaseQuantity: 1 }
+    //         });
+    //         idbPromise('cart', 'put', { ...product, purchaseQuantity: 1 });
+    //     }
+    // };
 
     return (
         <Modal open={open} onClose={onClose}>
@@ -85,12 +86,15 @@ const ProductModal = ({ product, open, onClose }) => {
                             {/* {product.description} */}
                         </Typography>
                     </CardContent>
-                    <Button onClick={() => { addToCart(); navigateToCart(); }} variant="contained" color="primary">
+                    <Link to={'/Detail'}>
+
+                        {/* <Button onClick={() => { addToCart(); navigateToCart(); }} variant="contained" color="primary"> */}
                         Add to Cart
-                    </Button>
+                        {/* </Button> */}
+                    </Link>
                 </Card>
             </Box>
-        </Modal>
+        </Modal >
     );
 };
 
