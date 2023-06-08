@@ -96,7 +96,6 @@ const UserProfile = () => {
 
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
-
   return (
     <div>
       <Box
@@ -123,7 +122,7 @@ const UserProfile = () => {
             alignItems="center"
             spacing={2}
           >
-            <Avatar alt="User Avatar" src={user.avatar} style={{ width: 100, height: 100 }} />
+            <Avatar alt="User Avatar" src={user.avatar} style={{ width: 200, height: 200, border: '2px solid #333', boxShadow: '0px 0px 5px 0px rgba(0,0,0,0.75)' }} />
             <input
               accept="image/*"
               id="icon-button-file"
@@ -144,19 +143,10 @@ const UserProfile = () => {
             alignItems="center"
             spacing={2}
           >
-            <Typography variant="h4">{user.firstName} {user.lastName}</Typography>
-            <Typography>Email: {user.email}</Typography>
+            <Typography variant="h4" style={{ marginBottom: '10px' }}>{user.firstName} {user.lastName}</Typography>
+            <Typography style={{ marginBottom: '10px' }}>Email: {user.email}</Typography>
             <Typography>User ID: {user.userId}</Typography>
           </Stack>
-          {/* <Stack
-            sx={{ pt: 4 }}
-            direction="row"
-            spacing={2}
-            justifyContent="center"
-          >
-            <Button variant="contained">Main call to action</Button>
-            <Button variant="outlined">Secondary action</Button>
-          </Stack> */}
         </Container>
       </Box>
       <Container sx={{ py: 8 }} maxWidth="md">
