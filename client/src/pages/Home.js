@@ -102,6 +102,7 @@ const Home = () => {
                     product={selectedProduct}
                     open={isModalOpen}
                     onClose={handleModalClose}
+
                 />
             )}
         </Container>

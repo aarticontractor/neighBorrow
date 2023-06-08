@@ -14,19 +14,51 @@ import Signup from './pages/Signup';
 import UserProfile from './pages/UserProfile.js';
 import About from './pages/About';
 import Detail from './pages/Detail';
+<<<<<<< HEAD
+import { setContext } from '@apollo/client/link/context';
+// import { Provider } from 'react-redux';
+import { StoreProvider } from './utils/globalState.js';
+import {
+    ApolloClient,
+    InMemoryCache,
+    ApolloProvider,
+    createHttpLink
+} from '@apollo/client';
+=======
 import { StoreProvider } from './utils/globalState';
 
 
 
+>>>>>>> main
 import NavBar from './components/NavBar';
 import Home from './pages/Home';
 // import { DefaultDeserializer } from 'v8';
 
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> main
 const httpLink = createHttpLink({
     uri: '/graphql',
 });
+const authLink = setContext((_, { headers }) => {
+    const token = localStorage.getItem('id_token');
+    return {
+        headers: {
+            ...headers,
+            authorization: token ? `Bearer ${token}` : '',
+        },
+    };
+});
+const client = new ApolloClient({
+    link: authLink.concat(httpLink),
+    cache: new InMemoryCache(),
+});
+
+
+
+
 
 const authLink = setContext((_, { headers }) => {
     const token = localStorage.getItem('id_token');
@@ -61,6 +93,10 @@ function App() {
                             <Route path='/products/:id' element={<Detail />} />
                             <Route path='/UserProfile' element={<UserProfile />} />
                         </Routes>
+<<<<<<< HEAD
+
+=======
+>>>>>>> main
                     </StoreProvider>
                 </div>
             </Router>

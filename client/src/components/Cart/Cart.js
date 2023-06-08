@@ -9,15 +9,13 @@ import Auth from '../../utils/auth';
 import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../../utils/action';
 // import { useStoreContext } from '../../utils/globalState.js';
 import { QUERY_CHECKOUT } from '../../utils/queries.js';
-import { useSelector, useDispatch } from 'react-redux';
+// import { useSelector, useDispatch } from 'react-redux';
+import { useStoreContext } from '../../utils/globalState.js';
 
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
 const Cart = () => {
-    const state = useSelector((state) => {
-        return state;
-    });
-    const dispatch = useDispatch();
+    const [state, dispatch] = useStoreContext();
     const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
 
 
