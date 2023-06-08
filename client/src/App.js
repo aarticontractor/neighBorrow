@@ -13,7 +13,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import UserProfile from './pages/UserProfile.js';
 import About from './pages/About';
-import Detail from './pages/Detail';
+import Cart from './components/Cart/Cart.js'
 import ProductCard from './components/ProductCard.js';
 
 // import { Provider } from 'react-redux';
@@ -58,7 +58,7 @@ function App() {
                             <Route path='/Signup' element={<Signup />} />
                             <Route path='/about' element={<About />} />
                             {/* <Route path='/detail' element={<Detail />} /> */}
-                            <Route path='/products/:id' element={<Detail />} />
+                            <Route path='/products' element={<Cart />} />
                             <Route path='/UserProfile' element={<UserProfile />} />
                             <Route path='/ProductCard' element={<ProductCard />} />
                         </Routes>

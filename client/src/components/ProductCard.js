@@ -1,16 +1,18 @@
 import React, { useEffect, useRef } from 'react';
-import { Card, CardActionArea, CardContent, CardMedia, Typography, Button } from '@material-ui/core';
+import { Card, CardContent, CardActionArea, CardMedia, Typography, Button } from '@material-ui/core';
 import anime from 'animejs';
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { ADD_TO_CART, UPDATE_CART_QUANTITY } from "../utils/action";
 import { idbPromise } from "../utils/helpers";
 import { useSelector } from 'react-redux';
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, onProductClick, disabled }) => {
+
     const nameRef = useRef(null);
     const priceRef = useRef(null);
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { cart } = useSelector((state) => state);
@@ -55,35 +57,36 @@ const ProductCard = ({ product }) => {
         });
     }, []);
 
-    const addToCartHandler = () => {
-        // Implement your add to cart logic here
-    };
+    // const addToCartHandler = () => {
+    //     // Implement your add to cart logic here
+    // };
 
     return (
         <Card>
-            {/* <CardActionArea onClick={() => onProductClick(product)}> */}
-            <CardMedia
-                component="img"
-                alt={product.name}
-                height="140"
-                image={product.image}
-                title={product.name}
-            />
-            <CardContent>
-                <Typography gutterBottom variant="h5" component="div" ref={nameRef}>
-                    {product.name}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" ref={priceRef}>
-                    ${product.price}
-                </Typography>
-            </CardContent>
-            {/* </CardActionArea> */}
-            <Link to={'/Detail'}>
+            <CardActionArea onClick={() => onProductClick(product)}>
+                <CardMedia
+                    component="img"
+                    alt={product.name}
+                    height="140"
+                    image={product.image}
+                    title={product.name}
+                />
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="div" ref={nameRef}>
+                        {product.name}
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" ref={priceRef}>
+                        ${product.price}
+                    </Typography>
+                </CardContent>
+                {/* </CardActionArea> */}
+
 
                 <Button onClick={() => { addToCart(); navigateToCart(); }} variant="contained" color="primary">
                     Add to Cart
                 </Button>
-            </Link>
+
+            </CardActionArea>
         </Card>
     );
 };
