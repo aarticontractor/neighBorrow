@@ -6,6 +6,7 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { AppBar, Toolbar, Button, Typography, IconButton, makeStyles, Menu, MenuItem, CircularProgress } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -21,63 +22,31 @@ const useStyles = makeStyles((theme) => ({
 
 function Nav() {
     const classes = useStyles();
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorElCategories, setAnchorElCategories] = React.useState(null);
+    const [anchorElProfile, setAnchorElProfile] = React.useState(null);
     const navigate = useNavigate();
     const { loading, error, data } = useQuery(GET_CATEGORIES);
     const user = Auth.getUser();
 
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
+    const handleCategoryClick = (event) => {
+        setAnchorElCategories(event.currentTarget);
     };
 
-    const handleClose = () => {
-        setAnchorEl(null);
+    const handleProfileClick = (event) => {
+        setAnchorElProfile(event.currentTarget);
     };
 
-    const handleCategoryClick = (parent, subCategory) => {
+    const handleCategoryClose = () => {
+        setAnchorElCategories(null);
+    };
+
+    const handleProfileClose = () => {
+        setAnchorElProfile(null);
+    };
+
+    const handleCategoryItemClick = (parent, subCategory) => {
         navigate('/', { state: { category: { parent, name: subCategory } } });
-        handleClose();
-    };
-
-    const showNavigation = () => {
-        if (Auth.loggedIn()) {
-            return (
-                <>
-                    <Button color="inherit" component={RouterLink} to="/listitem">
-                        List an Item
-                    </Button>
-                    <Button color="inherit">
-                        Welcome, {user.firstName}
-                    </Button>
-                    <Button color="inherit" component={RouterLink} to="/about">
-                        About Us
-                    </Button>
-                    <Button color="inherit" component={RouterLink} to="/reviews">
-                        Reviews
-                    </Button>
-                    <Button color="inherit" component={RouterLink} to="/userProfile">
-                        Profile
-                    </Button>
-                    <Button color="inherit" component={RouterLink} to="/contact">
-                        Contact Us
-                    </Button>
-                    <Button color="inherit" onClick={() => Auth.logout()}>
-                        Logout
-                    </Button>
-                </>
-            );
-        } else {
-            return (
-                <>
-                    <Button color="inherit" component={RouterLink} to="/signup">
-                        Signup
-                    </Button>
-                    <Button color="inherit" component={RouterLink} to="/login">
-                        Login
-                    </Button>
-                </>
-            );
-        }
+        handleCategoryClose();
     };
 
     const parentCategories = data?.getCategory?.reduce((acc, curr) => {
@@ -93,10 +62,10 @@ function Nav() {
             <Toolbar>
                 <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" component={RouterLink} to="/">
                     <HomeIcon />
-                    <Typography variant="h6" className={classes.title}>
-                        NeighBorrow
-                    </Typography>
                 </IconButton>
+                <Typography variant="h6" className={classes.title}>
+                    NeighBorrow
+                </Typography>
 
                 {loading ? (
                     <CircularProgress color="secondary" />
@@ -105,21 +74,21 @@ function Nav() {
                         Error loading categories
                     </Typography>
                 ) : (
-                    <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} color="inherit">
+                    <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleCategoryClick} color="inherit">
                         Categories
                         <ArrowDropDownIcon />
                     </Button>
                 )}
 
-                <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+                <Menu id="simple-menu" anchorEl={anchorElCategories} keepMounted open={Boolean(anchorElCategories)} onClose={handleCategoryClose}>
                     {parentCategories &&
                         Object.entries(parentCategories).map(([parent, subCategories]) => (
                             <div key={parent}>
-                                <MenuItem onClick={handleClose}>
+                                <MenuItem onClick={handleCategoryClose}>
                                     <Typography variant="h6">{parent}</Typography>
                                 </MenuItem>
                                 {subCategories.map((subCategory) => (
-                                    <MenuItem key={subCategory} onClick={() => handleCategoryClick(parent, subCategory)}>
+                                    <MenuItem key={subCategory} onClick={() => handleCategoryItemClick(parent, subCategory)}>
                                         {subCategory}
                                     </MenuItem>
                                 ))}
@@ -127,7 +96,45 @@ function Nav() {
                         ))}
                 </Menu>
 
-                {showNavigation()}
+                {Auth.loggedIn() ? (
+                    <>
+                        <Button color="inherit" component={RouterLink} to="/listitem">
+                            List an Item
+                        </Button>
+                        <Button color="inherit" component={RouterLink} to="/about">
+                            About Us
+                        </Button>
+                        <IconButton
+                            edge="end"
+                            aria-controls="account-menu"
+                            aria-haspopup="true"
+                            onClick={handleProfileClick}
+                            color="inherit"
+                        >
+                            <AccountCircleIcon />
+                        </IconButton>
+                        <Menu
+                            id="account-menu"
+                            anchorEl={anchorElProfile}
+                            keepMounted
+                            open={Boolean(anchorElProfile)}
+                            onClose={handleProfileClose}
+                        >
+                            <MenuItem onClick={handleProfileClose}>{`Welcome, ${user.firstName}`}</MenuItem>
+                            <MenuItem onClick={() => Auth.logout()}>Logout</MenuItem>
+                            <MenuItem component={RouterLink} to="/userProfile">Profile</MenuItem>
+                        </Menu>
+                    </>
+                ) : (
+                    <>
+                        <Button color="inherit" component={RouterLink} to="/signup">
+                            Signup
+                        </Button>
+                        <Button color="inherit" component={RouterLink} to="/login">
+                            Login
+                        </Button>
+                    </>
+                )}
             </Toolbar>
         </AppBar>
     );

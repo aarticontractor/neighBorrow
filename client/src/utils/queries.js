@@ -59,6 +59,18 @@ query GetCategory {
   }
 `;
 
+export const GET_USER = gql`
+query Query($userId: ID!) {
+  getUserByID(userId: $userId) {
+    _id
+    email
+    firstName
+    image
+    lastName
+  }
+}
+`;
+
 export const QUERY_USER = gql`
   {
     user {

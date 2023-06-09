@@ -9,6 +9,7 @@ import { GET_ALL_PRODUCTS } from '../utils/queries';
 import { useLocation } from 'react-router-dom';
 import moment from 'moment';
 import Auth from '../utils/auth';
+import { checkDate } from '../utils/checkDate';
 
 const PRODUCTS_PER_PAGE = 8; // set the number of products per page
 
@@ -35,18 +36,6 @@ const Home = () => {
 
     const handlePageChange = (event, value) => {
         setPage(value);
-    };
-
-    const checkDate = (start_date, end_date) => {
-
-        const startDate = moment.unix(start_date / 1000);
-        const endDate = moment.unix(end_date / 1000);
-        const today = moment().startOf('day');
-        // console.log(startDate);
-        // console.log(endDate);
-        // console.log(today);
-
-        return startDate <= today && today <= endDate;
     };
 
     const handleSearch = () => {

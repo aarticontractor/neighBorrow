@@ -15,14 +15,15 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_USER = gql`
-  mutation addUser($firstName: String!, $lastName: String!, $email: String!, $password: String!) {
-    addUser(firstName: $firstName, lastName: $lastName, email: $email, password: $password) {
+  mutation addUser($firstName: String!, $lastName: String!, $email: String!, $password: String!, $image: String!,) {
+    addUser(firstName: $firstName, lastName: $lastName, email: $email, password: $password, image: $image,) {
       token
       user {
         _id
         firstName
         lastName
         email
+        image
       }
     }
   }
@@ -48,6 +49,15 @@ export const ADD_PRODUCT = gql`
         firstName
         lastName
       }
+    }
+  }
+`;
+
+export const UPDATE_USER_AVATAR = gql`
+  mutation updateUserAvatar($image: String!, $userId: ID!) {
+    updateUserAvatar(image: $image, userId: $userId) {
+      _id
+      image
     }
   }
 `;

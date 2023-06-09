@@ -21,6 +21,9 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  image: {
+    type: String
+},
 });
 
 // Hash the password before saving the user
