@@ -5,13 +5,13 @@ import { idbPromise } from '../utils/helpers';
 // import Cart from '../components/Cart/Cart';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-    REMOVE_FROM_CART,
-    UPDATE_CART_QUANTITY,
-    ADD_TO_CART,
+    // REMOVE_FROM_CART,
     UPDATE_PRODUCTS,
+    UPDATE_CART_QUANTITY,
+    ADD_TO_CART
 } from '../utils/actions';
 import { GET_ALL_PRODUCTS } from '../utils/queries';
-// import spinner from '../assets/spinner.gif';
+// import CartItem from '../components/CartItem.js';
 
 
 
@@ -24,9 +24,9 @@ function Detail() {
 
     const [currentProduct, setCurrentProduct] = useState({});
     const dispatch = useDispatch();
-    const { loading, error, data } = useQuery(GET_ALL_PRODUCTS);
+    const { loading, data } = useQuery(GET_ALL_PRODUCTS);
 
-    const { products } = state || {};
+    const { products, cart } = state || {};
 
     useEffect(() => {
         // already in global store
@@ -58,45 +58,47 @@ function Detail() {
         }
     }, [products, data, loading, dispatch, id]);
 
-    // const addToCart = () => {
+    const addToCart = () => {
 
-    //     const itemInCart = cart.find((cartItem) => cartItem._id === id);
-    //     if (itemInCart) {
-    //         dispatch({
-    //             type: UPDATE_CART_QUANTITY,
-    //             _id: id,
-    //             purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
-    //         });
-    //         idbPromise('cart', 'put', {
-    //             ...itemInCart,
-    //             purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
-    //         });
-    //     } else {
-    //         dispatch({
-    //             type: ADD_TO_CART,
-    //             product: { ...currentProduct, purchaseQuantity: 1 },
-    //         });
-    //         idbPromise('cart', 'put', { ...currentProduct, purchaseQuantity: 1 });
-    //     }
-
-    // };
-
-    const removeFromCart = () => {
-
-        dispatch({
-            type: REMOVE_FROM_CART,
-            _id: currentProduct._id,
-        });
-
-        idbPromise('cart', 'delete', { ...currentProduct });
+        const itemInCart = cart.find((cartItem) => cartItem._id === id);
+        if (itemInCart) {
+            dispatch({
+                type: UPDATE_CART_QUANTITY,
+                _id: id,
+                purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
+            });
+            idbPromise('cart', 'put', {
+                ...itemInCart,
+                purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
+            });
+        } else {
+            dispatch({
+                type: ADD_TO_CART,
+                product: { ...currentProduct, purchaseQuantity: 1 },
+            });
+            idbPromise('cart', 'put', { ...currentProduct, purchaseQuantity: 1 });
+        }
 
     };
+
+    // const removeFromCart = () => {
+
+    //     dispatch({
+    //         type: REMOVE_FROM_CART,
+    //         _id: currentProduct._id,
+    //     });
+
+    //     idbPromise('cart', 'delete', { ...currentProduct });
+
+    // };
 
     return (
         <>
             {/* {currentProduct ( */}
             <div className="container my-1">
                 <Link to="/">← Back to Products</Link>
+                <Link to="/cart">← Go to cart</Link>
+
 
                 <h2>{currentProduct.name}</h2>
 
@@ -104,8 +106,8 @@ function Detail() {
 
                 <p>
                     <strong>Price:</strong>${currentProduct.price}{' '}
-                    <button>Add to Cart</button>
-                    {/* <button onClick={addToCart}>Add to Cart</button> */}
+
+                    <button onClick={addToCart}>Add to Cart</button>
                     {/* <button
                     disabled={!cart.find((p) => p._id === currentProduct._id)}
                     onClick={removeFromCart}
@@ -118,6 +120,7 @@ function Detail() {
                     src={currentProduct.image}
                     alt={currentProduct.name}
                 />
+
             </div>
             {/* // ) : null} */}
             {/* {loading ? <img src={spinner} alt="loading" /> : null} */}
