@@ -7,7 +7,6 @@ export const QUERY_PRODUCTS = gql`
       name
       description
       price
-      quantity
       image
       category {
         _id
@@ -58,6 +57,18 @@ query GetCategory {
       _id
     }
   }
+`;
+
+export const GET_USER = gql`
+query Query($userId: ID!) {
+  getUserByID(userId: $userId) {
+    _id
+    email
+    firstName
+    image
+    lastName
+  }
+}
 `;
 
 export const QUERY_USER = gql`
