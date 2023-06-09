@@ -62,3 +62,11 @@ export const UPDATE_USER_AVATAR = gql`
     }
   }
 `;
+
+export const DELETE_PRODUCT = gql`
+  mutation DeleteProduct($productId: ID!) {
+    deleteProduct(productId: $productId) {
+      _id
+    }
+  }
+`;
