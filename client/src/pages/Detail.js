@@ -16,9 +16,8 @@ import { idbPromise } from '../utils/helpers';
 
 
 function Detail() {
-
     const [reduxState, dispatch] = useStoreContext();
-
+    const { id } = useParams();
 
     const [currentProduct, setCurrentProduct] = useState({});
 
