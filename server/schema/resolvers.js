@@ -20,6 +20,9 @@ const resolvers = {
         getProductByID: async (_, { productId }) => {
             return await Product.findById(productId).populate('user').populate('category');
         },
+        getUserByID: async (_, { userId }) => {
+            return await User.findById(userId);
+        },
         order: async (parent, { _id }, context) => {
             if (context.user) {
                 const user = await User.findById(context.user._id).populate({
@@ -98,6 +101,7 @@ const resolvers = {
             return { category };
         },
         updateUser: async (parent, args, context) => {
+
             if (context.user) {
                 return await User.findByIdAndUpdate(context.user._id, args, {
                     new: true,
@@ -105,6 +109,19 @@ const resolvers = {
             }
             throw new AuthenticationError('Not logged in');
         },
+        updateUserAvatar: async (_, { image, userId }, context) => {
+            const user = await User.findById(userId);
+
+            if (!user) {
+                throw new Error('User not found');
+            }
+
+            user.image = image;
+            await user.save();
+
+            return user;
+        },
+
         updateProduct: async (parent, { _id, quantity }) => {
             const decrement = Math.abs(quantity) * -1;
             return await Product.findByIdAndUpdate(

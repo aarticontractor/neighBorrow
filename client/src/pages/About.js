@@ -1,5 +1,10 @@
 import React, { useEffect } from 'react';
-import { Container, Grid, Typography, Card, CardContent, Avatar, Box } from '@material-ui/core';
+import { Container, Grid, Typography, Card, CardContent, Avatar, Box, IconButton } from '@material-ui/core';
+import GitHubIcon from '@material-ui/icons/GitHub';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import EmailIcon from '@material-ui/icons/Email';
+import MediumIcon from '@material-ui/icons/BorderColor';
+import WebIcon from '@material-ui/icons/Web';
 import { makeStyles } from '@material-ui/core/styles';
 import anime from 'animejs';
 import member1 from '../aboutUs-imgs/Aarti.jpg'
@@ -36,10 +41,10 @@ const About = () => {
     const classes = useStyles();
 
     const teamMembers = [
-        { name: 'Aarti Contractor', role: 'Founder', image: member1 },
-        { name: 'Laurie Fish', role: 'Founder', image: member2 },
-        { name: 'Kaiden Parcher', role: 'Founder', image: member3 },
-        { name: 'Amanda Gray', role: 'Founder', image: member4 },
+        { name: 'Aarti Contractor', role: 'Founder', image: member1, github: 'https://github.com/aarticontractor', linkedin: 'https://linkedin.com/in/aarti-contractor', medium: 'https://medium.com/@aarticontractor' },
+        { name: 'Laurie Fish', role: 'Founder', image: member2, github: 'https://github.com/lauriefish22', linkedin: 'https://linkedin.com/in/laurie', medium: 'https://medium.com/@laurie' },
+        { name: 'Kaiden Parcher', role: 'Founder', image: member3, github: 'https://github.com/Kaidenparcher', linkedin: 'https://linkedin.com/in/kaiden', medium: 'https://medium.com/@kaiden' },
+        { name: 'Amanda Gray', role: 'Founder', image: member4, github: 'https://github.com/Berkeleycodingmomma', linkedin: 'https://linkedin.com/in/amanda', medium: 'https://medium.com/@amanda' },
     ];
 
     useEffect(() => {
@@ -54,16 +59,16 @@ const About = () => {
     return (
         <Container>
             <Box className={classes.root}>
-                <Typography variant="h2" gutterBottom>
+                <Typography variant="h2" gutterBottom color="textPrimary">
                     About Us
                 </Typography>
 
-                <Typography variant="body1" paragraph>
+                <Typography variant="body1" paragraph color="textSecondary">
                     Many people can't afford to purchase everything new. With NeighBorrow, now you can just borrow something for a few days, and go on unforgettable experiences that you never would have been able to experience before.
                     Sharing items is not only good for the environment, it creates strong bonds and connections between you and anyone else in your neighborhood, who both use the same item(s).
                 </Typography>
 
-                <Typography variant="h4" gutterBottom style={{ marginTop: '2em' }}>
+                <Typography variant="h4" gutterBottom style={{ marginTop: '2em' }} color="textPrimary">
                     Meet the Team
                 </Typography>
 
@@ -81,6 +86,12 @@ const About = () => {
                                     <Typography variant="subtitle1" color="textSecondary" align="center">
                                         {member.role}
                                     </Typography>
+                                    <Box display="flex" justifyContent="center" marginTop={2}>
+                                        <IconButton href={member.github} color="primary"><GitHubIcon /></IconButton>
+                                        <IconButton href={member.linkedin} color="primary"><LinkedInIcon /></IconButton>
+                                        <IconButton href={member.email} color="primary"><EmailIcon /></IconButton>
+                                        <IconButton href={member.medium} color="primary"><MediumIcon /></IconButton>
+                                    </Box>
                                 </CardContent>
                             </Card>
                         </Grid>
