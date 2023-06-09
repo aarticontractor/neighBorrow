@@ -81,6 +81,8 @@ extend type Query {
       name: String!
     ): Category
 
+    deleteProduct(productId: ID!): Product
+
     updateProduct(_id: ID!, quantity: Int!): Product
     
     login(

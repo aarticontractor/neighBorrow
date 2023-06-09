@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Avatar, Button, Box, Grid, Container, IconButton } from '@material-ui/core';
+import { Avatar, Button, Box, Grid, Container, IconButton, Tabs, Tab, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
@@ -13,7 +13,11 @@ import { useSelector } from 'react-redux';
 import { GET_ALL_PRODUCTS } from '../utils/queries';
 import { GET_USER } from '../utils/queries';
 import { useMutation } from '@apollo/client';
-import { UPDATE_USER_AVATAR } from '../utils/mutations';
+import { UPDATE_USER_AVATAR, DELETE_PRODUCT } from '../utils/mutations';
+import { checkDate } from '../utils/checkDate';
+import Pagination from '@mui/material/Pagination';
+import Lottie from 'react-lottie';
+import avatarAnimation from '../assets/imageUpload.json';
 
 const REACT_APP_CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dlfgz7bn4/image/upload"
 const REACT_APP_CLOUDINARY_UPLOAD_PRESET = "neighborrow"
@@ -21,9 +25,10 @@ const REACT_APP_CLOUDINARY_UPLOAD_PRESET = "neighborrow"
 const UserProfile = () => {
   const userObj = Auth.getUser();
   const [updateUserAvatar, { avatarData }] = useMutation(UPDATE_USER_AVATAR);
+  const [deleteProduct] = useMutation(DELETE_PRODUCT);
   const { loading: userLoading, error: userError, data: userData } = useQuery(GET_USER, {
     variables: {
-      userId: userObj._idf
+      userId: userObj._id
     }
   });
 
@@ -38,17 +43,26 @@ const UserProfile = () => {
 
   const state = useSelector((state) => {
     return state;
-});
+  });
+  const [activeTab, setActiveTab] = useState(0);
   const { loading, error, data } = useQuery(GET_ALL_PRODUCTS);
   const { products } = state;
-  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [activeProducts, setActiveProducts] = useState([]);
+  const [expiredProducts, setExpiredProducts] = useState([]);
 
 
   useEffect(() => {
     const filterByUser = () => {
       if (data) {
-        let filtered = data.getProducts.filter(product => product.user._id === user.userId);
-        setFilteredProducts(filtered)
+        let active = [], expired = [];
+        data.getProducts.forEach(product => {
+          if (product.user._id === user.userId) {
+            if (checkDate(product.start_date, product.end_date)) active.push(product);
+            else expired.push(product);
+          }
+        });
+        setActiveProducts(active);
+        setExpiredProducts(expired);
       }
     }
     filterByUser();
@@ -63,9 +77,37 @@ const UserProfile = () => {
     }
   }, [userData]);
 
-  const handleAvatarUpload = async (e) => {
-    const file = e.target.files[0];
+  const handleTabChange = (event, newValue) => {
+    setActiveTab(newValue);
+  };
 
+  const handleRelist = async (productId) => {
+    // logic to relist the product
+  };
+
+  const handleDelete = async (productId) => {
+    const confirmation = window.confirm("Are you sure you want to delete this product?");
+    if (!confirmation) return;
+    await deleteProduct({ variables: { productId } });
+    setActiveProducts(activeProducts.filter((product) => product._id !== productId));
+    setExpiredProducts(expiredProducts.filter((product) => product._id !== productId));
+  };
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: avatarAnimation,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+    animationSpeed: 4,
+  };
+
+  const handleAvatarUpload = async (e) => {
+    // Initially set avatar to null
+    setUser((prevState) => ({ ...prevState, avatar: null }));
+
+    const file = e.target.files[0];
     const formData = new FormData();
     formData.append('file', file);
     formData.append('upload_preset', REACT_APP_CLOUDINARY_UPLOAD_PRESET);
@@ -86,15 +128,20 @@ const UserProfile = () => {
 
       const fileData = await response.json();
 
+
       // Now, we update the user avatar in your user database
       await updateUserAvatar({ variables: { image: fileData.secure_url, userId: user.userId } });
+      await new Promise((resolve) => setTimeout(resolve, 3000));
 
       // Then we also update it in the local state
       setUser((prevState) => ({ ...prevState, avatar: fileData.secure_url }));
     } catch (error) {
       console.error('Error:', error);
+      // If there's an error, set avatar back to the previous state
+      setUser((prevState) => ({ ...prevState, avatar: user.avatar }));
     }
   };
+
 
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
@@ -108,106 +155,132 @@ const UserProfile = () => {
         }}
       >
         <Container maxWidth="sm">
-          <Typography
-            component="h1"
-            variant="h2"
-            align="center"
-            color="text.primary"
-            gutterBottom
-          >
-            Profile
+          <Typography variant="h4" align="center" color="primary" style={{ marginBottom: '20px', fontFamily: 'Poppins, sans-serif' }}>
+            Your Profile
           </Typography>
-          <Stack
-            sx={{ pt: 4 }}
-            direction="column"
-            justifyContent="center"
-            alignItems="center"
-            spacing={2}
-          >
-            <Avatar alt="User Avatar" src={user.avatar} style={{ width: 200, height: 200, border: '2px solid #333', boxShadow: '0px 0px 5px 0px rgba(0,0,0,0.75)' }} />
-            <input
-              accept="image/*"
-              id="icon-button-file"
-              type="file"
-              style={{ display: 'none' }}
-              onChange={handleAvatarUpload}
-            />
-            <label htmlFor="icon-button-file">
-              <IconButton color="primary" aria-label="upload picture" component="span">
-                <PhotoCamera />
-              </IconButton>
-            </label>
-          </Stack>
-          <Stack
-            sx={{ pt: 4 }}
-            direction="column"
-            justifyContent="center"
-            alignItems="center"
-            spacing={2}
-          >
-            <Typography variant="h4" style={{ marginBottom: '10px' }}>{user.firstName} {user.lastName}</Typography>
-            <Typography style={{ marginBottom: '10px' }}>Email: {user.email}</Typography>
-            <Typography>User ID: {user.userId}</Typography>
-          </Stack>
+          <Grid container spacing={3}>
+            <Grid item xs={12} sm={6}>
+              <Stack
+                sx={{ pt: 4 }}
+                direction="column"
+                justifyContent="center"
+                alignItems="center"
+                spacing={2}
+              >
+                {user.avatar ?
+                  <Avatar alt="User Avatar" src={user.avatar} style={{ width: 200, height: 200, border: '2px solid #333', boxShadow: '0px 0px 5px 0px rgba(0,0,0,0.75)' }} />
+                  :
+                  <Lottie options={defaultOptions} height={200} width={200} />
+                }
+                <Typography variant="body2" align="center" color="textSecondary">
+                  Click on the camera icon to change photo
+                </Typography>
+                <input
+                  accept="image/*"
+                  id="icon-button-file"
+                  type="file"
+                  style={{ display: 'none' }}
+                  onChange={handleAvatarUpload}
+                />
+                <label htmlFor="icon-button-file">
+                  <IconButton color="primary" aria-label="upload picture" component="span">
+                    <PhotoCamera />
+                  </IconButton>
+                </label>
+              </Stack>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Stack
+                sx={{ pt: 4 }}
+                direction="column"
+                justifyContent="center"
+                alignItems="center"
+                spacing={2}
+              >
+                <Typography variant="h5" style={{ marginBottom: '10px', color: '#3f51b5', fontFamily: 'Poppins, sans-serif' }}>{user.firstName} {user.lastName}</Typography>
+                <Typography style={{ marginBottom: '10px', fontFamily: 'Roboto, sans-serif', color: '#757575' }}>Email: {user.email}</Typography>
+              </Stack>
+            </Grid>
+          </Grid>
         </Container>
       </Box>
       <Container sx={{ py: 8 }} maxWidth="md">
-        <Stack
-          sx={{ pt: 4 }}
-          direction="column"
-          justifyContent="center"
-          alignItems="center"
-          spacing={2}
-        >
-          <Typography
-            component="h5"
-            variant="h5"
-            align="center"
-            color="text.primary"
-            gutterBottom
-            style={{ paddingBottom: "1em" }}
-          >
-            Active Listings: {filteredProducts.length}
-          </Typography>
-        </Stack>
-        <Grid
-          container spacing={4}
-        >
-          {filteredProducts.map((product) => (
-            <Grid item key={product._id} xs={12} sm={6} md={4}>
-              <Card
-                sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
-              >
-                <CardMedia
-                  component="div"
-                  sx={{
-                    // 16:9
-                    pt: '56.25%',
-                  }}
-                  image={product.image}
-                />
-                <CardContent sx={{ flexGrow: 1 }}>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    {product.name}
-                  </Typography>
-                  <Typography>
-                    ${product.price}
-                  </Typography>
-                  <Typography>
-                    {product.description}
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button size="small">View</Button>
-                  <Button size="small">Edit</Button>
-                </CardActions>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
+        <Tabs value={activeTab} onChange={handleTabChange}>
+          <Tab label={`Active Listings: ${activeProducts.length}`} />
+          <Tab label={`Expired Listings: ${expiredProducts.length}`} />
+        </Tabs>
+        <TabPanel value={activeTab} index={0}>
+          <ProductList products={activeProducts} handleDelete={handleDelete} handleRelist={handleRelist} />
+        </TabPanel>
+        <TabPanel value={activeTab} index={1}>
+          <ProductList products={expiredProducts} handleDelete={handleDelete} handleRelist={handleRelist} expired={true} />
+        </TabPanel>
       </Container>
     </div>
   );
 };
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ pt: 3 }}>
+          {children}
+        </Box>
+      )}
+    </div>
+  );
+}
+
+function ProductList({ products, handleDelete, handleRelist, expired = false }) {
+  const [page, setPage] = useState(1);
+  const itemsPerPage = 6;
+
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
+
+  return (
+    <>
+      <Grid container spacing={4}>
+        {products.slice((page - 1) * itemsPerPage, page * itemsPerPage).map((product) => (
+          <Grid item key={product._id} xs={12} sm={6} md={4}>
+            <ProductCard product={product} handleDelete={handleDelete} handleRelist={handleRelist} expired={expired} />
+          </Grid>
+        ))}
+      </Grid>
+      <Pagination count={Math.ceil(products.length / itemsPerPage)} page={page} onChange={handleChange} />
+    </>
+  )
+}
+
+function ProductCard({ product, handleDelete, handleRelist, expired }) {
+  return (
+    <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      <CardMedia
+        component="img"
+        height="194"
+        image={product.image}
+        alt={product.name}
+      />
+      <CardContent>
+        <Typography variant="h5">{product.name}</Typography>
+        <Typography>${product.price}</Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small" onClick={() => handleDelete(product._id)}>Delete</Button>
+        <Button size="small">Edit</Button>
+        {expired && <Button size="small" onClick={() => handleRelist(product._id)}>Re-List</Button>}
+      </CardActions>
+    </Card>
+  );
+}
 
 export default UserProfile;
