@@ -4,7 +4,7 @@ import { Container, Grid, TextField, Button, Select, MenuItem } from '@material-
 import { Pagination } from '@material-ui/lab';
 import SearchIcon from '@material-ui/icons/Search';
 import ProductCard from '../components/ProductCard';
-import ProductModal from '../components/ProductModal';
+// import ProductModal from '../components/ProductModal';
 import { GET_ALL_PRODUCTS } from '../utils/queries';
 import { useLocation } from 'react-router-dom';
 import moment from 'moment';
@@ -30,9 +30,9 @@ const Home = () => {
         // setIsModalOpen(true);
     };
 
-    const handleModalClose = () => {
-        setIsModalOpen(false);
-    };
+    // const handleModalClose = () => {
+    //     setIsModalOpen(false);
+    // };
 
     const handlePageChange = (event, value) => {
         setPage(value);
