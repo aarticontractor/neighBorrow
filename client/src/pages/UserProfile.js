@@ -20,7 +20,6 @@ const REACT_APP_CLOUDINARY_UPLOAD_PRESET = "neighborrow"
 
 const UserProfile = () => {
   const userObj = Auth.getUser();
-  console.log('userObj :', userObj);
   const [updateUserAvatar, { avatarData }] = useMutation(UPDATE_USER_AVATAR);
   const { loading: userLoading, error: userError, data: userData } = useQuery(GET_USER, {
     variables: {

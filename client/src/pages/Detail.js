@@ -2,16 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { idbPromise } from '../utils/helpers';
-// import Cart from '../components/Cart/Cart';
 import { useSelector, useDispatch } from 'react-redux';
 import {
     REMOVE_FROM_CART,
-    UPDATE_CART_QUANTITY,
-    ADD_TO_CART,
     UPDATE_PRODUCTS,
 } from '../utils/actions';
 import { GET_ALL_PRODUCTS } from '../utils/queries';
-// import spinner from '../assets/spinner.gif';
 
 
 
@@ -20,7 +16,6 @@ function Detail() {
         return state;
     });
     const { id } = useParams();
-    console.log(' id :', id);
 
     const [currentProduct, setCurrentProduct] = useState({});
     const dispatch = useDispatch();
@@ -31,13 +26,10 @@ function Detail() {
     useEffect(() => {
         // already in global store
         if (products.length) {
-            console.log('products :', products);
             setCurrentProduct(products.find((product) => product._id === id));
-            console.log('urrentProduct :', currentProduct);
         }
         // retrieved from server
         else if (data) {
-            console.log('data :', data);
             dispatch({
                 type: UPDATE_PRODUCTS,
                 products: data.getProducts,
