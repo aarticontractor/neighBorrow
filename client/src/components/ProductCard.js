@@ -3,10 +3,20 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Card, CardActionArea, CardContent, CardMedia, Typography, Button } from '@material-ui/core';
 import anime from 'animejs';
+import "../index.css";
+import { useNavigate } from 'react-router-dom';
+
+
+
+
 
 const ProductCard = ({ product, onProductClick, disabled }) => {
     const nameRef = useRef(null);
     const priceRef = useRef(null);
+    const navigate = useNavigate();
+    const navigateToDetail = () => {
+        navigate('/Detail');
+    }
     const state = useSelector((state) => {
         return state;
     });
@@ -22,9 +32,10 @@ const ProductCard = ({ product, onProductClick, disabled }) => {
         });
     }, []);
 
-    const addToCartHandler = () => {
-        // Implement your add to cart logic here
-    };
+
+    // const addToCartHandler = () => {
+    //     // Implement your add to cart logic here
+    // };
 
     // const { image, name, _id, price, description } = item;
 
@@ -39,7 +50,7 @@ const ProductCard = ({ product, onProductClick, disabled }) => {
                         image={product.image}
                         title={product.name}
                     />
-                </Link> 
+                </Link>
             </CardActionArea>
             <CardContent>
                 <Link to={`/products/${product._id}`}>
@@ -50,12 +61,20 @@ const ProductCard = ({ product, onProductClick, disabled }) => {
                 <Typography variant="body2" color="textSecondary" ref={priceRef}>
                     ${product.price}
                 </Typography>
-            </CardContent>
+            </CardContent >
             <Button disabled={disabled} onClick={addToCartHandler}>
                 {disabled ? 'Unavailable' : 'Add to Cart'}
             </Button>
-        </Card>
+            {/* <Button onClick={addToCart} variant="contained" color="primary">
+                Add To Cart
+            </Button> */}
+
+            {/* <Button disabled={disabled} onClick={addToCartHandler}>
+                {disabled ? 'Unavailable' : 'Add to Cart'}
+            </Button> */}
+        </Card >
     );
 };
+
 
 export default ProductCard;

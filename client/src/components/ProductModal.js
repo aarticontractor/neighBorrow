@@ -15,7 +15,7 @@ const ProductModal = ({ product, open, onClose }) => {
     const { cart } = state;
     const { image, name, _id, price } = product;
 
-    const navigateToCart = () => {
+    const navigateToDetail = () => {
         navigate('/Detail');
     }
     const addToCart = () => {
@@ -84,10 +84,15 @@ const ProductModal = ({ product, open, onClose }) => {
                             <h1>test</h1>
                             {/* {product.description} */}
                         </Typography>
+                        <Button onClick={navigateToDetail} variant="contained" color="primary">
+                            Details
+                        </Button>
+                        <Button onClick={addToCart} variant="contained" color="primary">
+                            Add to cart
+                        </Button>
+
                     </CardContent>
-                    <Button onClick={() => { addToCart(); navigateToCart(); }} variant="contained" color="primary">
-                        Add to Cart
-                    </Button>
+
                 </Card>
             </Box>
         </Modal>

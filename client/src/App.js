@@ -58,6 +58,7 @@ function App() {
                             <Route path='/about' element={<About />} />
                             {/* <Route path='/detail' element={<Detail />} /> */}
                             <Route path='/products/:id' element={<Detail />} />
+                            <Route path='/cart' element={<Cart />} />
                             <Route path='/UserProfile' element={<UserProfile />} />
                         </Routes>
                     </Provider>
