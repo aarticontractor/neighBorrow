@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { Container, Grid, TextField, Button, Select, MenuItem } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
@@ -14,7 +14,7 @@ import { checkDate } from '../utils/checkDate';
 const PRODUCTS_PER_PAGE = 8; // set the number of products per page
 
 const Home = () => {
-    const [selectedProduct, setSelectedProduct] = React.useState(null);
+    const [selectedProduct, setSelectedProduct] = useState(null);
     const [isModalOpen, setIsModalOpen] = React.useState(false);
     const [page, setPage] = React.useState(1);
     const [priceRange, setPriceRange] = React.useState('All');
@@ -24,8 +24,10 @@ const Home = () => {
     const location = useLocation();
 
     const handleProductClick = (product) => {
+        console.log('product :', product);
         setSelectedProduct(product);
-        setIsModalOpen(true);
+        console.log(' selectedProduct:', selectedProduct);
+        // setIsModalOpen(true);
     };
 
     const handleModalClose = () => {
@@ -63,12 +65,13 @@ const Home = () => {
     };
 
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (data) {
             handleSearch();
         }
 
-    }, [data, search, priceRange, location.state?.category]);
+    },
+        [data, search, priceRange, location.state?.category]);
 
     if (loading) return 'Loading...';
     if (error) return `Error! ${error.message}`;
@@ -111,13 +114,13 @@ const Home = () => {
                 onChange={handlePageChange}
                 color="primary"
             />
-            {selectedProduct && (
+            {/* {selectedProduct && (
                 <ProductModal
                     product={selectedProduct}
                     open={isModalOpen}
                     onClose={handleModalClose}
                 />
-            )}
+            )} */}
         </Container>
     );
 };
