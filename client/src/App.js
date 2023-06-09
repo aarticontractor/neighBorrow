@@ -14,6 +14,8 @@ import Signup from './pages/Signup';
 import UserProfile from './pages/UserProfile.js';
 import About from './pages/About';
 import Detail from './pages/Detail';
+import Cart from './pages/CartPage.js';
+
 
 // import { Provider } from 'react-redux';
 import { StoreProvider } from './utils/globalState.js';
@@ -58,6 +60,7 @@ function App() {
                             <Route path='/about' element={<About />} />
                             {/* <Route path='/detail' element={<Detail />} /> */}
                             <Route path='/products/:id' element={<Detail />} />
+                            <Route path='/cart' element={<Cart />} />
                             <Route path='/UserProfile' element={<UserProfile />} />
                         </Routes>
                     </StoreProvider >

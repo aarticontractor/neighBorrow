@@ -1,10 +1,20 @@
 import React, { useEffect, useRef } from 'react';
 import { Card, CardActionArea, CardContent, CardMedia, Typography, Button } from '@material-ui/core';
 import anime from 'animejs';
+import "../index.css";
+import { useNavigate } from 'react-router-dom';
+
+
+
+
 
 const ProductCard = ({ product, onProductClick, disabled }) => {
     const nameRef = useRef(null);
     const priceRef = useRef(null);
+    const navigate = useNavigate();
+    const navigateToDetail = () => {
+        navigate('/Detail');
+    }
 
     useEffect(() => {
         anime({
@@ -16,9 +26,10 @@ const ProductCard = ({ product, onProductClick, disabled }) => {
         });
     }, []);
 
-    const addToCartHandler = () => {
-        // Implement your add to cart logic here
-    };
+
+    // const addToCartHandler = () => {
+    //     // Implement your add to cart logic here
+    // };
 
     return (
         <Card>
@@ -39,11 +50,19 @@ const ProductCard = ({ product, onProductClick, disabled }) => {
                     </Typography>
                 </CardContent>
             </CardActionArea>
-            <Button disabled={disabled} onClick={addToCartHandler}>
-                {disabled ? 'Unavailable' : 'Add to Cart'}
+            <Button onClick={navigateToDetail} variant="contained" color="primary">
+                Details
             </Button>
+            {/* <Button onClick={addToCart} variant="contained" color="primary">
+                Add To Cart
+            </Button> */}
+
+            {/* <Button disabled={disabled} onClick={addToCartHandler}>
+                {disabled ? 'Unavailable' : 'Add to Cart'}
+            </Button> */}
         </Card>
     );
 };
+
 
 export default ProductCard;

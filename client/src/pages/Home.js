@@ -79,7 +79,8 @@ const Home = () => {
             handleSearch();
         }
 
-    }, [data, search, priceRange, location.state?.category]);
+    },
+        [data, search, priceRange, location.state?.category]);
 
     if (loading) return 'Loading...';
     if (error) return `Error! ${error.message}`;

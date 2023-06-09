@@ -12,19 +12,23 @@ import {
 } from '../utils/action';
 import { QUERY_PRODUCTS } from '../utils/queries';
 import { idbPromise } from '../utils/helpers';
+import '../components/Cart/cart.css'
+
+
+
 
 
 
 function Detail() {
-
-    const [reduxState, dispatch] = useStoreContext();
-
+    const [state, dispatch] = useStoreContext();
+    const { id } = useParams();
 
     const [currentProduct, setCurrentProduct] = useState({});
 
     const { loading, data } = useQuery(QUERY_PRODUCTS);
 
-    const { products, cart } = reduxState;
+    const { products, cart } = state;
+
 
     useEffect(() => {
 
@@ -52,6 +56,7 @@ function Detail() {
             });
         }
     }, [products, data, loading, dispatch, id]);
+
 
     const addToCart = () => {
 
@@ -89,7 +94,7 @@ function Detail() {
 
     return (
         <>
-            <h1>Your Shopping Cart</h1>
+
             {currentProduct && cart ? (
                 <div className="container my-1">
                     <Link to="/">← Back to Products</Link>
