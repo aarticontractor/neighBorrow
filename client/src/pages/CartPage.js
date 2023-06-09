@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
-import CartItem from '../CartItem';
+import CartItem from '../components/CartItem.js';
 import { useLazyQuery } from '@apollo/client';
-import { idbPromise } from '../../utils/helpers';
+import { idbPromise } from '../utils/helpers';
 
-import './cart.css';
-import Auth from '../../utils/auth';
-import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../../utils/actions.js';
+import './cart-page.css';
+import Auth from '../utils/auth';
+import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../utils/action';
 // import { useStoreContext } from '../../utils/globalState.js';
-import { QUERY_CHECKOUT } from '../../utils/queries.js';
+import { QUERY_CHECKOUT } from '../utils/queries.js';
 // import { useSelector, useDispatch } from 'react-redux';
-import { useStoreContext } from '../../utils/globalState.js';
+import { useStoreContext } from '../utils/globalState.js';
 
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
@@ -66,22 +66,24 @@ const Cart = () => {
         });
     }
 
-    if (!state.cartOpen) {
-        return (
-            <div className="cart-closed" onClick={toggleCart}>
-                <span role="img" aria-label="trash">
-                    🛒
-                </span>
-            </div>
-        );
-    }
+    // if (!state.cartOpen) {
+    //     return (
+    //         <div className="cart-closed" onClick={toggleCart}>
+    //             <span role="img" aria-label="trash">
+    //                 🛒
+    //             </span>
+    //         </div>
+    //     );
+    // }
 
     return (
+
         <div className="cart">
+
             <div className="close" onClick={toggleCart}>
                 [close]
             </div>
-            <h2>Shopping Cart</h2>
+
             {state.cart.length ? (
                 <div>
                     {state.cart.map((item) => (
@@ -90,6 +92,7 @@ const Cart = () => {
 
                     <div className="total-price">
                         <strong>Total: ${calculateTotal()}</strong>
+
 
                         {Auth.loggedIn() ? (
                             <button onClick={submitCheckout}>Checkout</button>
@@ -100,7 +103,11 @@ const Cart = () => {
                 </div>
             ) : (
                 <h3>
-
+                    <h2 id="test">Shopping Cart</h2>
+                    <span role="img" aria-label="shocked">
+                        😱
+                    </span>
+                    You haven't added anything to your cart yet!
                 </h3>
             )}
         </div>
@@ -108,3 +115,4 @@ const Cart = () => {
 };
 
 export default Cart;
+
