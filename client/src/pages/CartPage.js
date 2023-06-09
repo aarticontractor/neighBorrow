@@ -6,7 +6,7 @@ import { idbPromise } from '../utils/helpers';
 
 import './cart-page.css';
 import Auth from '../utils/auth';
-import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../utils/action';
+import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../utils/actions.js';
 // import { useStoreContext } from '../../utils/globalState.js';
 import { QUERY_CHECKOUT } from '../utils/queries.js';
 // import { useSelector, useDispatch } from 'react-redux';
