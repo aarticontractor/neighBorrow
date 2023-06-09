@@ -9,14 +9,14 @@ import {
     UPDATE_CART_QUANTITY,
     ADD_TO_CART,
     UPDATE_PRODUCTS,
-} from '../utils/action';
+} from '../utils/actions.js';
 import { QUERY_PRODUCTS } from '../utils/queries';
 import { idbPromise } from '../utils/helpers';
 
 
 
 function Detail() {
-
+    const { id } = useParams();
     const [reduxState, dispatch] = useStoreContext();
 
 
