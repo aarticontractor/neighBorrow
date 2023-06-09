@@ -6,7 +6,7 @@ import { idbPromise } from '../../utils/helpers';
 
 import './cart.css';
 import Auth from '../../utils/auth';
-import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../../utils/actions';
+import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../../utils/action';
 // import { useStoreContext } from '../../utils/globalState.js';
 import { QUERY_CHECKOUT } from '../../utils/queries.js';
 // import { useSelector, useDispatch } from 'react-redux';
@@ -100,15 +100,11 @@ const Cart = () => {
                 </div>
             ) : (
                 <h3>
-                    <span role="img" aria-label="shocked">
-                        😱
-                    </span>
-                    You haven't added anything to your cart yet!
+
                 </h3>
             )}
         </div>
     );
 };
 
-// export default Cart;
-
+export default Cart;
