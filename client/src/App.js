@@ -15,6 +15,7 @@ import UserProfile from './pages/UserProfile.js';
 import About from './pages/About';
 import Detail from './pages/Detail';
 import { Provider } from 'react-redux';
+import Cart from './pages/Cart';
 import store from './utils/store';
 // import { StoreProvider } from './utils/globalState.js';
 

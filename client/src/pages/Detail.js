@@ -5,10 +5,10 @@ import { idbPromise } from '../utils/helpers';
 // import Cart from '../components/Cart/Cart';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  REMOVE_FROM_CART,
-  UPDATE_CART_QUANTITY,
-  ADD_TO_CART,
-  UPDATE_PRODUCTS,
+    REMOVE_FROM_CART,
+    //   UPDATE_CART_QUANTITY,
+    //   ADD_TO_CART,
+    UPDATE_PRODUCTS,
 } from '../utils/actions';
 import { GET_ALL_PRODUCTS } from '../utils/queries';
 // import spinner from '../assets/spinner.gif';
@@ -20,31 +20,31 @@ function Detail() {
         return state;
     });
     const { id } = useParams();
-    console.log(' id :',  id);
+    console.log(' id :', id);
 
     const [currentProduct, setCurrentProduct] = useState({});
     const dispatch = useDispatch();
-    const { loading, error,  data } = useQuery(GET_ALL_PRODUCTS);
-    
+    const { loading, error, data } = useQuery(GET_ALL_PRODUCTS);
+
     const { products } = state || {};
-    
+
     useEffect(() => {
         // already in global store
         if (products.length) {
-        console.log('products :', products);
+            console.log('products :', products);
             setCurrentProduct(products.find((product) => product._id === id));
             console.log('urrentProduct :', currentProduct);
         }
         // retrieved from server
         else if (data) {
-        console.log('data :', data);
+            console.log('data :', data);
             dispatch({
-            type: UPDATE_PRODUCTS,
-            products: data.getProducts,
+                type: UPDATE_PRODUCTS,
+                products: data.getProducts,
             });
 
             data.getProducts.forEach((product) => {
-            idbPromise('products', 'put', product);
+                idbPromise('products', 'put', product);
             });
         }
         // get cache from idb
@@ -97,23 +97,23 @@ function Detail() {
             {/* {currentProduct ( */}
             <div className="container my-1">
                 <Link to="/">← Back to Products</Link>
-    
+
                 <h2>{currentProduct.name}</h2>
-    
+
                 <p>{currentProduct.description}</p>
-    
+
                 <p>
-                <strong>Price:</strong>${currentProduct.price}{' '}
-                <button>Add to Cart</button>
-                {/* <button onClick={addToCart}>Add to Cart</button> */}
-                {/* <button
+                    <strong>Price:</strong>${currentProduct.price}{' '}
+                    <button>Add to Cart</button>
+                    {/* <button onClick={addToCart}>Add to Cart</button> */}
+                    {/* <button
                     disabled={!cart.find((p) => p._id === currentProduct._id)}
                     onClick={removeFromCart}
                 >
                     Remove from Cart
                 </button> */}
                 </p>
-    
+
                 <img
                     src={currentProduct.image}
                     alt={currentProduct.name}
@@ -122,7 +122,7 @@ function Detail() {
             {/* // ) : null} */}
             {/* {loading ? <img src={spinner} alt="loading" /> : null} */}
             {/* <Cart /> */}
-      </>
+        </>
     );
 }
 

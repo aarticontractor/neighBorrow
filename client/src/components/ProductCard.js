@@ -62,9 +62,9 @@ const ProductCard = ({ product, onProductClick, disabled }) => {
                     ${product.price}
                 </Typography>
             </CardContent >
-            <Button disabled={disabled} onClick={addToCartHandler}>
+            {/* <Button disabled={disabled} onClick={addToCartHandler}>
                 {disabled ? 'Unavailable' : 'Add to Cart'}
-            </Button>
+            </Button> */}
             {/* <Button onClick={addToCart} variant="contained" color="primary">
                 Add To Cart
             </Button> */}
