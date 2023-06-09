@@ -9,7 +9,7 @@ import CardMedia from '@mui/material/CardMedia';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import Auth from '../utils/auth';
 import { useQuery } from '@apollo/client';
-// import { useStoreContext } from '../utils/globalState';
+import { useSelector } from 'react-redux';
 import { GET_ALL_PRODUCTS } from '../utils/queries';
 import { GET_USER } from '../utils/queries';
 import { useMutation } from '@apollo/client';
@@ -20,10 +20,11 @@ const REACT_APP_CLOUDINARY_UPLOAD_PRESET = "neighborrow"
 
 const UserProfile = () => {
   const userObj = Auth.getUser();
+  console.log('userObj :', userObj);
   const [updateUserAvatar, { avatarData }] = useMutation(UPDATE_USER_AVATAR);
   const { loading: userLoading, error: userError, data: userData } = useQuery(GET_USER, {
     variables: {
-      userId: userObj._id
+      userId: userObj._idf
     }
   });
 
@@ -36,7 +37,9 @@ const UserProfile = () => {
   });
 
 
-  const [state] = useStoreContext();
+  const state = useSelector((state) => {
+    return state;
+});
   const { loading, error, data } = useQuery(GET_ALL_PRODUCTS);
   const { products } = state;
   const [filteredProducts, setFilteredProducts] = useState([]);
