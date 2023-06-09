@@ -9,7 +9,7 @@ import CardMedia from '@mui/material/CardMedia';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import Auth from '../utils/auth';
 import { useQuery } from '@apollo/client';
-import { useStoreContext } from '../utils/globalState';
+// import { useStoreContext } from '../utils/globalState';
 import { GET_ALL_PRODUCTS } from '../utils/queries';
 import { GET_USER } from '../utils/queries';
 import { useMutation } from '@apollo/client';
