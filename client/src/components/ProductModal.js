@@ -2,7 +2,10 @@ import React from 'react';
 import { Modal, Card, CardContent, CardMedia, Typography, IconButton, Box, Button } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import { idbPromise } from "../utils/helpers";
-import { ADD_TO_CART, UPDATE_CART_QUANTITY } from "../utils/action";
+
+import { useSelector, useDispatch } from 'react-redux';
+import { ADD_TO_CART, UPDATE_CART_QUANTITY } from "../utils/actions";
+
 import { useNavigate } from 'react-router-dom';
 import { useProductReducer } from '../utils/reducers';
 import { checkDate } from '../utils/checkDate';
@@ -14,7 +17,7 @@ const ProductModal = ({ product, open, onClose }) => {
     const { cart } = state;
     const { image, name, _id, price } = product;
 
-    const navigateToCart = () => {
+    const navigateToDetail = () => {
         navigate('/Detail');
     }
 
@@ -85,9 +88,17 @@ const ProductModal = ({ product, open, onClose }) => {
                             <h1>test</h1>
                             {/* {product.description} */}
                         </Typography>
+                        <Button onClick={navigateToDetail} variant="contained" color="primary">
+                            Details
+                        </Button>
+                        <Button onClick={addToCart} variant="contained" color="primary">
+                            Add to cart
+                        </Button>
+
                     </CardContent>
+
                     <Button onClick={() => { addToCart(); navigateToCart(); }} variant="contained" color="primary" disabled={disabled}>
-                {disabled ? 'Unavailable' : 'Add to Cart'}
+               Add to Cart
             </Button>
                 </Card>
             </Box>
