@@ -14,13 +14,12 @@ import Signup from './pages/Signup';
 import UserProfile from './pages/UserProfile.js';
 import About from './pages/About';
 import Detail from './pages/Detail';
-
-// import { Provider } from 'react-redux';
-import { StoreProvider } from './utils/globalState.js';
+import { Provider } from 'react-redux';
+import store from './utils/store';
+// import { StoreProvider } from './utils/globalState.js';
 
 import NavBar from './components/NavBar';
 import Home from './pages/Home';
-// import { DefaultDeserializer } from 'v8';
 
 
 
@@ -47,7 +46,8 @@ function App() {
         <ApolloProvider client={client}>
             <Router>
                 <div>
-                    <StoreProvider>
+                    {/* <StoreProvider> */}
+                    <Provider store={store}>
                         <NavBar />
                         <Routes>
                             <Route path='/' element={<Home />} />
@@ -60,7 +60,8 @@ function App() {
                             <Route path='/products/:id' element={<Detail />} />
                             <Route path='/UserProfile' element={<UserProfile />} />
                         </Routes>
-                    </StoreProvider >
+                    </Provider>
+                    {/* </StoreProvider > */}
                 </div >
             </Router >
         </ApolloProvider >
