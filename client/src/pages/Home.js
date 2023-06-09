@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { Container, Grid, TextField, Button, Select, MenuItem } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
@@ -13,7 +13,7 @@ import Auth from '../utils/auth';
 const PRODUCTS_PER_PAGE = 8; // set the number of products per page
 
 const Home = () => {
-    const [selectedProduct, setSelectedProduct] = React.useState(null);
+    const [selectedProduct, setSelectedProduct] = useState(null);
     const [isModalOpen, setIsModalOpen] = React.useState(false);
     const [page, setPage] = React.useState(1);
     const [priceRange, setPriceRange] = React.useState('All');
@@ -23,8 +23,10 @@ const Home = () => {
     const location = useLocation();
 
     const handleProductClick = (product) => {
+        console.log('product :', product);
         setSelectedProduct(product);
-        setIsModalOpen(true);
+        console.log(' selectedProduct:', selectedProduct);
+        // setIsModalOpen(true);
     };
 
     const handleModalClose = () => {
@@ -40,9 +42,9 @@ const Home = () => {
         const startDate = moment.unix(start_date / 1000);
         const endDate = moment.unix(end_date / 1000);
         const today = moment().startOf('day');
-        console.log(startDate);
-        console.log(endDate);
-        console.log(today);
+        // console.log(startDate);
+        // console.log(endDate);
+        // console.log(today);
 
         return startDate <= today && today <= endDate;
     };
@@ -74,7 +76,7 @@ const Home = () => {
     };
 
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (data) {
             handleSearch();
         }
@@ -122,13 +124,13 @@ const Home = () => {
                 onChange={handlePageChange}
                 color="primary"
             />
-            {selectedProduct && (
+            {/* {selectedProduct && (
                 <ProductModal
                     product={selectedProduct}
                     open={isModalOpen}
                     onClose={handleModalClose}
                 />
-            )}
+            )} */}
         </Container>
     );
 };
