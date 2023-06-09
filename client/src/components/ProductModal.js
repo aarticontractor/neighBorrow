@@ -3,7 +3,7 @@ import { Modal, Card, CardContent, CardMedia, Typography, IconButton, Box, Butto
 import CloseIcon from '@material-ui/icons/Close';
 import { idbPromise } from "../utils/helpers";
 import { useSelector, useDispatch } from 'react-redux';
-import { ADD_TO_CART, UPDATE_CART_QUANTITY } from "../utils/action";
+import { ADD_TO_CART, UPDATE_CART_QUANTITY } from "../utils/actions";
 import { useNavigate } from 'react-router-dom';
 
 const ProductModal = ({ product, open, onClose }) => {
