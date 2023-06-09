@@ -16,10 +16,11 @@ import { idbPromise } from '../utils/helpers';
 
 
 function Detail() {
-    const { id } = useParams();
+
     const [reduxState, dispatch] = useStoreContext();
 
     const { id } = useParams();
+
     const [currentProduct, setCurrentProduct] = useState({});
 
     const { loading, data } = useQuery(QUERY_PRODUCTS);
