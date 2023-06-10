@@ -136,7 +136,9 @@ const ListProduct = () => {
     };
 
     return (
+
         <Container className={classes.root}>
+
             {uploading ? (
                 <Lottie options={defaultOptions} height={400} width={400} />
             ) : (
@@ -144,7 +146,7 @@ const ListProduct = () => {
                     <Typography variant="h2" gutterBottom className="animate">
                         List an Item
                     </Typography>
-
+                    <Typography variant="h5">Let's get ready to showcase your rental. Please ensure the best experience for potential renters.</Typography>
                     <Grid container spacing={3} className="animate">
                         <Grid item xs={12} sm={6}>
                             <Paper className={classes.paper}>
@@ -175,7 +177,7 @@ const ListProduct = () => {
                         <Grid item xs={12} sm={6}>
                             <Paper className={classes.paper}>
                                 <Typography variant="h4" gutterBottom>
-                                    Product Info
+                                    Item Info
                                 </Typography>
                                 <TextField
                                     className={classes.formField}

@@ -63,7 +63,7 @@ function Nav() {
                 <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" component={RouterLink} to="/">
                     <HomeIcon />
                 </IconButton>
-                <Typography variant="h6" className={classes.title}>
+                <Typography variant="h5" className={classes.title}>
                     NeighBorrow
                 </Typography>
 

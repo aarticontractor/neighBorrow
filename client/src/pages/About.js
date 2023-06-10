@@ -63,7 +63,7 @@ const About = () => {
                     About Us
                 </Typography>
 
-                <Typography variant="body1" paragraph color="textSecondary">
+                <Typography variant="h5" paragraph color="textSecondary">
                     Many people can't afford to purchase everything new. With NeighBorrow, now you can just borrow something for a few days, and go on unforgettable experiences that you never would have been able to experience before.
                     Sharing items is not only good for the environment, it creates strong bonds and connections between you and anyone else in your neighborhood, who both use the same item(s).
                 </Typography>

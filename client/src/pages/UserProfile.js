@@ -169,7 +169,6 @@ const UserProfile = () => {
     <div>
       <Box
         sx={{
-          bgcolor: 'background.paper',
           pt: 8,
           pb: 6,
         }}
