@@ -98,6 +98,9 @@ function Nav() {
 
                 {Auth.loggedIn() ? (
                     <>
+                        <Button color="inherit" component={RouterLink} to="/cart">
+                            My Cart
+                        </Button>
                         <Button color="inherit" component={RouterLink} to="/listitem">
                             List an Item
                         </Button>
@@ -133,6 +136,7 @@ function Nav() {
                         <Button color="inherit" component={RouterLink} to="/login">
                             Login
                         </Button>
+
                     </>
                 )}
             </Toolbar>

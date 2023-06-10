@@ -3,6 +3,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import CartItem from '../components/CartItem.js';
 import { useLazyQuery } from '@apollo/client';
 import { idbPromise } from '../utils/helpers';
+import DeleteBtn from '../components/DeleteBtn.js';
 
 import './cart-page.css';
 import Auth from '../utils/auth';
