@@ -87,20 +87,14 @@ const Cart = () => {
         <div class='container'>
             <h1 id='title'>Shopping Cart</h1>
             <div className="cart">
-
-                {/* <div className="close" onClick={toggleCart}>
-                    [close]
-                </div> */}
-
                 {state.cart.length ? (
-                    <div id='item'>
+                    <div className="cart-items" id='item'>
                         {state.cart.map((item) => (
                             <CartItem key={item._id} item={item} />
                         ))}
 
                         <div className="total-price">
                             <strong>Total: ${calculateTotal()}</strong>
-
 
                             {Auth.loggedIn() ? (
                                 <button onClick={submitCheckout}>Checkout</button>
@@ -121,7 +115,7 @@ const Cart = () => {
             </div>
         </div>
     );
+
 };
 
 export default Cart;
-
