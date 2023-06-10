@@ -76,6 +76,7 @@ extend type Query {
       end_date: String
     ): Product
     updateUserAvatar(image: String!, userId: ID!): User
+    updateProductById(productId: ID!, name: String, description: String, image: String, price: Float, categoryId: ID, start_date: String, end_date: String): Product
 
     addCategory(
       name: String!

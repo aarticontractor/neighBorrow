@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Avatar, Button, Box, Grid, Container, IconButton, Tabs, Tab, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
+import { Avatar, Button, Box, Grid, Container, IconButton, Tabs, Tab, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Select, MenuItem } from '@material-ui/core';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
@@ -10,17 +10,17 @@ import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import Auth from '../utils/auth';
 import { useQuery } from '@apollo/client';
 import { useSelector } from 'react-redux';
-import { GET_ALL_PRODUCTS } from '../utils/queries';
-import { GET_USER } from '../utils/queries';
+import { GET_ALL_PRODUCTS, GET_USER } from '../utils/queries';
 import { useMutation } from '@apollo/client';
 import { UPDATE_USER_AVATAR, DELETE_PRODUCT } from '../utils/mutations';
 import { checkDate } from '../utils/checkDate';
 import Pagination from '@mui/material/Pagination';
 import Lottie from 'react-lottie';
 import avatarAnimation from '../assets/imageUpload.json';
+import RelistModal from '../components/relistModal';
 
-const REACT_APP_CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dlfgz7bn4/image/upload"
-const REACT_APP_CLOUDINARY_UPLOAD_PRESET = "neighborrow"
+const REACT_APP_CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dlfgz7bn4/image/upload";
+const REACT_APP_CLOUDINARY_UPLOAD_PRESET = "neighborrow";
 
 const UserProfile = () => {
   const userObj = Auth.getUser();
@@ -40,16 +40,16 @@ const UserProfile = () => {
     avatar: userObj.image
   });
 
-
-  const state = useSelector((state) => {
-    return state;
-  });
+  const state = useSelector((state) => state);
   const [activeTab, setActiveTab] = useState(0);
   const { loading, error, data } = useQuery(GET_ALL_PRODUCTS);
   const { products } = state;
   const [activeProducts, setActiveProducts] = useState([]);
   const [expiredProducts, setExpiredProducts] = useState([]);
-
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [deleteConfirmation, setDeleteConfirmation] = useState(false);
+  const [deleteProductId, setDeleteProductId] = useState(null);
 
   useEffect(() => {
     const filterByUser = () => {
@@ -57,6 +57,9 @@ const UserProfile = () => {
         let active = [], expired = [];
         data.getProducts.forEach(product => {
           if (product.user._id === user.userId) {
+            console.log("Current start date: " + product.start_date);
+            console.log("Current end date: " + product.end_date);
+            console.log("Product name is: " + product.name);
             if (checkDate(product.start_date, product.end_date)) active.push(product);
             else expired.push(product);
           }
@@ -81,17 +84,40 @@ const UserProfile = () => {
     setActiveTab(newValue);
   };
 
-  const handleRelist = async (productId) => {
-    // logic to relist the product
+  const handleOpenModal = (product) => {
+    setSelectedProduct(product);
+    setOpenModal(true);
   };
 
-  const handleDelete = async (productId) => {
-    const confirmation = window.confirm("Are you sure you want to delete this product?");
-    if (!confirmation) return;
-    await deleteProduct({ variables: { productId } });
-    setActiveProducts(activeProducts.filter((product) => product._id !== productId));
-    setExpiredProducts(expiredProducts.filter((product) => product._id !== productId));
+  const handleCloseModal = () => {
+    setSelectedProduct(null);
+    setOpenModal(false);
   };
+
+  const handleRelist = (productId) => {
+    const product = expiredProducts.find((product) => product._id === productId);
+    handleOpenModal(product);
+  };
+  const handleEdit = (productId) => {
+    const product = activeProducts.find((product) => product._id === productId);
+    handleOpenModal(product);
+  };
+
+  const handleDelete = (productId) => {
+    setDeleteProductId(productId);
+    setDeleteConfirmation(true);
+  };
+  const handleConfirmDelete = async () => {
+    await deleteProduct({ variables: { productId: deleteProductId } });
+    setActiveProducts(activeProducts.filter((product) => product._id !== deleteProductId));
+    setExpiredProducts(expiredProducts.filter((product) => product._id !== deleteProductId));
+    setDeleteConfirmation(false);
+  };
+  const handleCancelDelete = () => {
+    setDeleteConfirmation(false);
+  };
+
+
 
   const defaultOptions = {
     loop: true,
@@ -104,7 +130,6 @@ const UserProfile = () => {
   };
 
   const handleAvatarUpload = async (e) => {
-    // Initially set avatar to null
     setUser((prevState) => ({ ...prevState, avatar: null }));
 
     const file = e.target.files[0];
@@ -113,7 +138,6 @@ const UserProfile = () => {
     formData.append('upload_preset', REACT_APP_CLOUDINARY_UPLOAD_PRESET);
 
     try {
-      // Upload file to Cloudinary
       const response = await fetch(
         REACT_APP_CLOUDINARY_URL,
         {
@@ -128,23 +152,19 @@ const UserProfile = () => {
 
       const fileData = await response.json();
 
-
-      // Now, we update the user avatar in your user database
       await updateUserAvatar({ variables: { image: fileData.secure_url, userId: user.userId } });
       await new Promise((resolve) => setTimeout(resolve, 3000));
 
-      // Then we also update it in the local state
       setUser((prevState) => ({ ...prevState, avatar: fileData.secure_url }));
     } catch (error) {
       console.error('Error:', error);
-      // If there's an error, set avatar back to the previous state
       setUser((prevState) => ({ ...prevState, avatar: user.avatar }));
     }
   };
 
-
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
+
   return (
     <div>
       <Box
@@ -210,12 +230,29 @@ const UserProfile = () => {
           <Tab label={`Expired Listings: ${expiredProducts.length}`} />
         </Tabs>
         <TabPanel value={activeTab} index={0}>
-          <ProductList products={activeProducts} handleDelete={handleDelete} handleRelist={handleRelist} />
+          <ProductList products={activeProducts} handleDelete={handleDelete} handleEdit={handleEdit} handleRelist={handleRelist} active={true} expirec={false} />
         </TabPanel>
         <TabPanel value={activeTab} index={1}>
-          <ProductList products={expiredProducts} handleDelete={handleDelete} handleRelist={handleRelist} expired={true} />
+          <ProductList products={expiredProducts} handleDelete={handleDelete} handleEdit={handleEdit} handleRelist={handleRelist} active={false} expired={true} />
         </TabPanel>
       </Container>
+      {selectedProduct && (
+        <RelistModal
+          open={openModal}
+          handleClose={handleCloseModal}
+          product={selectedProduct}
+        />
+      )}
+      <Dialog open={deleteConfirmation} onClose={handleCancelDelete}>
+        <DialogTitle>Confirm Deletion</DialogTitle>
+        <DialogContent>
+          <Typography variant="body1">Are you sure you want to permanently delete this product?</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCancelDelete}>Cancel</Button>
+          <Button onClick={handleConfirmDelete} color="error">Delete</Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
@@ -239,7 +276,7 @@ function TabPanel(props) {
   );
 }
 
-function ProductList({ products, handleDelete, handleRelist, expired = false }) {
+function ProductList({ products, handleDelete, handleEdit, handleRelist, active = true, expired = false }) {
   const [page, setPage] = useState(1);
   const itemsPerPage = 6;
 
@@ -252,16 +289,16 @@ function ProductList({ products, handleDelete, handleRelist, expired = false }) 
       <Grid container spacing={4}>
         {products.slice((page - 1) * itemsPerPage, page * itemsPerPage).map((product) => (
           <Grid item key={product._id} xs={12} sm={6} md={4}>
-            <ProductCard product={product} handleDelete={handleDelete} handleRelist={handleRelist} expired={expired} />
+            <ProductCard product={product} handleDelete={handleDelete} handleEdit={handleEdit} handleRelist={handleRelist} active={active} expired={expired} />
           </Grid>
         ))}
       </Grid>
       <Pagination count={Math.ceil(products.length / itemsPerPage)} page={page} onChange={handleChange} />
     </>
-  )
+  );
 }
 
-function ProductCard({ product, handleDelete, handleRelist, expired }) {
+function ProductCard({ product, handleDelete, handleEdit, handleRelist, active, expired }) {
   return (
     <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       <CardMedia
@@ -276,7 +313,7 @@ function ProductCard({ product, handleDelete, handleRelist, expired }) {
       </CardContent>
       <CardActions>
         <Button size="small" onClick={() => handleDelete(product._id)}>Delete</Button>
-        <Button size="small">Edit</Button>
+        {active && <Button size="small" onClick={() => handleEdit(product._id)}>Edit</Button>}
         {expired && <Button size="small" onClick={() => handleRelist(product._id)}>Re-List</Button>}
       </CardActions>
     </Card>
