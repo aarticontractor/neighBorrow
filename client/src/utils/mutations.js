@@ -70,3 +70,27 @@ export const DELETE_PRODUCT = gql`
     }
   }
 `;
+
+
+export const UPDATE_PRODUCT_BY_ID = gql`
+  mutation UpdateProduct($productId: ID!, $name: String, $description: String, $image: String, $price: Float, $categoryId: ID, $start_date: String, $end_date: String) {
+    updateProductById(productId: $productId, name: $name, description: $description, image: $image, price: $price, categoryId: $categoryId, start_date: $start_date, end_date: $end_date) {
+      _id
+      name
+      description
+      image
+      price
+      start_date
+      end_date
+      category {
+        _id
+        name
+      }
+      user {
+        _id
+        firstName
+        lastName
+      }
+    }
+  }
+`;

@@ -131,6 +131,29 @@ const resolvers = {
             );
         },
 
+        updateProductById: async (_, { productId, name, description, image, price, categoryId, start_date, end_date }) => {
+            try {
+                const product = await Product.findByIdAndUpdate(
+                    productId,
+                    {
+                        name,
+                        description,
+                        image,
+                        price,
+                        category: categoryId,
+                        start_date,
+                        end_date,
+                    },
+                    { new: true }
+                ).populate('user').populate('category');
+
+                return product;
+            } catch (error) {
+                console.error('Error updating product:', error);
+                throw new Error('Failed to update product');
+            }
+        },
+
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
 
