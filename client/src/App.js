@@ -17,6 +17,7 @@ import Detail from './pages/Detail';
 import { Provider } from 'react-redux';
 import Cart from './pages/CartPage.js';
 import store from './utils/store';
+
 // import { StoreProvider } from './utils/globalState.js';
 
 import NavBar from './components/NavBar';
@@ -51,6 +52,7 @@ function App() {
                     <Provider store={store}>
                         <NavBar />
                         <Routes>
+
                             <Route path='/' element={<Home />} />
                             <Route path='/listitem' element={<ListItem />} />
                             <Route path='/checkout' element={<Checkout />} />

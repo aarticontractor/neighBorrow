@@ -1,4 +1,4 @@
-.cart {
+/* .cart {
     position: fixed;
     top: 0;
     right: 0;
@@ -10,6 +10,35 @@
     padding: 0.5rem;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
     border-bottom-left-radius: 0.5rem;
+} */
+.cart {
+    width: 400px;
+    height: 250px;
+    background-color: var(--light);
+
+    border-style: solid;
+    border-color: black;
+
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+}
+#title {
+    text-align: center;
+    padding-bottom: 40px;
+    padding-top: 30px;
+}
+.container {
+    height: 10em;
+    position: relative;
+}
+
+#item {
+    color: blue;
+    margin-top: 10px;
+    font-size: 24px;
+    font-weight: bolder;
 }
 
 #test {
