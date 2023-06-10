@@ -2,11 +2,14 @@ import React from 'react';
 // import { useStoreContext } from "../utils/globalState";
 import { REMOVE_FROM_CART, UPDATE_CART_QUANTITY } from "../utils/actions";
 import { idbPromise } from "../utils/helpers";
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+// import { Link } from 'react-router-dom';
 
 
 const CartItem = ({ item }) => {
+    const state = useSelector((state) => {
+        return state;
+    });
 
 
 
@@ -43,35 +46,37 @@ const CartItem = ({ item }) => {
 
     return (
         <div className="flex-row">
-            <Link to={`/products/${item._id}`}>
-                <div className='cart-item-details'>
-                    <img
-                        src={`/images/${item.image}`}
-                        alt=""
-                    />
-                    <div>{item.name}, ${item.price}</div>
-                </div>
-
-            </Link>
+            {/* <Link to={`/products/${item._id}`}> */}
+            <div className='cart-item-details'>
+                <img
+                    src={`/images/${item.image}`}
+                    alt="" />
+            </div>
             <div>
-                <span>Qty:</span>
-                <input
-                    type="number"
-                    placeholder="1"
-                    value={item.purchaseQuantity}
-                    onChange={onChange}
-                />
-                <span
-                    role="img"
-                    aria-label="trash"
-                    onClick={() => removeFromCart(item)}
-                >
-                    🗑️
-                </span>
+                <div>{item.name}, ${item.price}</div>
+
+
+                {/* </Link> */}
+                <div>
+                    <span>Qty:</span>
+                    <input
+                        type="number"
+                        placeholder="1"
+                        value={item.purchaseQuantity}
+                        onChange={onChange}
+                    />
+                    <span
+                        role="img"
+                        aria-label="trash"
+                        onClick={() => removeFromCart(item)}
+                    >
+                        🗑️
+                    </span>
+                </div>
             </div>
         </div>
 
     );
-}
+};
 
 export default CartItem;
