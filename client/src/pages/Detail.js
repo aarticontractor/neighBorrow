@@ -97,7 +97,7 @@ function Detail() {
             {/* {currentProduct ( */}
             <div className="container my-1">
                 <Link to="/">← Back to Products</Link>
-                <Link to="/cart">← Go to cart</Link>
+                <Link to="/cart"> Go to cart</Link>
 
 
                 <h2>{currentProduct.name}</h2>

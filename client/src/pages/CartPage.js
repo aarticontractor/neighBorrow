@@ -86,12 +86,12 @@ const Cart = () => {
 
         <div className="cart">
 
-            <div className="close" onClick={toggleCart}>
-                [close]
-            </div>
+            {/* <div className="close" onClick={toggleCart}>
+                    [close]
+                </div> */}
 
             {state.cart.length ? (
-                <div>
+                <div id='item'>
                     {state.cart.map((item) => (
                         <CartItem key={item._id} item={item} />
                     ))}
