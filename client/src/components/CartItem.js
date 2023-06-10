@@ -46,17 +46,11 @@ const CartItem = ({ item }) => {
 
     return (
         <div className="flex-row">
-            {/* <Link to={`/products/${item._id}`}> */}
             <div className='cart-item-details'>
-                <img
-                    src={`/images/${item.image}`}
-                    alt="" />
+                <img src={`/images/${item.image}`} alt="" />
             </div>
             <div>
                 <div>{item.name}: ${item.price}</div>
-
-
-                {/* </Link> */}
                 <div>
                     <span>Qty: </span>
                     <input
@@ -65,17 +59,14 @@ const CartItem = ({ item }) => {
                         value={item.purchaseQuantity}
                         onChange={onChange}
                     />
-                    <span
-                        role="img"
-                        aria-label="trash"
+                    <button
                         onClick={() => removeFromCart(item)}
                     >
-                        🗑️
-                    </span>
+                        Remove
+                    </button>
                 </div>
             </div>
         </div>
-
     );
 };
 

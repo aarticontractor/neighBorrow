@@ -30,7 +30,7 @@ export const reducer = (state = initialState, action) => {
             };
         case REMOVE_FROM_CART:
             let newState = state.cart.filter((product) => {
-                return product.id !== action._id;
+                return product._id !== action._id;  // changed from product.id to product._id
             });
             return {
                 ...state,
@@ -43,7 +43,10 @@ export const reducer = (state = initialState, action) => {
                 cartOpen: true,
                 cart: state.cart.map((product) => {
                     if (action._id === product._id) {
-                        product.purchaseQuantity = action.purchaseQuantity;
+                        return {
+                            ...product,
+                            purchaseQuantity: action.purchaseQuantity,  // Returns a new product object
+                        };
                     }
                     return product;
                 }),
@@ -69,8 +72,5 @@ export const reducer = (state = initialState, action) => {
             return state;
     }
 };
-export default reducer;
 
-// export function useProductReducer(initialState) {
-//     return useReducer(reducer, initialState);
-// }
+export default reducer;
