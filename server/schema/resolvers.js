@@ -148,6 +148,17 @@ const resolvers = {
 
             return { token, user };
         },
+
+        deleteProduct: async (_, { productId }) => {
+            const product = await Product.findById(productId);
+
+            if (!product) {
+                throw new Error('Product not found');
+            }
+
+            await Product.findByIdAndDelete(productId);
+            return product;
+        },
     }
 }
 

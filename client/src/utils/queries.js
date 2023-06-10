@@ -76,6 +76,7 @@ export const QUERY_USER = gql`
     user {
       firstName
       lastName
+      image
       orders {
         _id
         purchaseDate
