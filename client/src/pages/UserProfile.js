@@ -136,6 +136,7 @@ const UserProfile = () => {
     const formData = new FormData();
     formData.append('file', file);
     formData.append('upload_preset', REACT_APP_CLOUDINARY_UPLOAD_PRESET);
+    await new Promise((resolve) => setTimeout(resolve, 5000));
 
     try {
       const response = await fetch(
@@ -153,7 +154,7 @@ const UserProfile = () => {
       const fileData = await response.json();
 
       await updateUserAvatar({ variables: { image: fileData.secure_url, userId: user.userId } });
-      await new Promise((resolve) => setTimeout(resolve, 3000));
+
 
       setUser((prevState) => ({ ...prevState, avatar: fileData.secure_url }));
     } catch (error) {
