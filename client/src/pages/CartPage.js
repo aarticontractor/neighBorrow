@@ -83,39 +83,41 @@ const Cart = () => {
     // }
 
     return (
+        <div class='container'>
+            <h1 id='title'>Shopping Cart</h1>
+            <div className="cart">
 
-        <div className="cart">
-
-            {/* <div className="close" onClick={toggleCart}>
+                {/* <div className="close" onClick={toggleCart}>
                     [close]
                 </div> */}
 
-            {state.cart.length ? (
-                <div id='item'>
-                    {state.cart.map((item) => (
-                        <CartItem key={item._id} item={item} />
-                    ))}
+                {state.cart.length ? (
+                    <div id='item'>
+                        {state.cart.map((item) => (
+                            <CartItem key={item._id} item={item} />
+                        ))}
 
-                    <div className="total-price">
-                        <strong>Total: ${calculateTotal()}</strong>
+                        <div className="total-price">
+                            <strong>Total: ${calculateTotal()}</strong>
 
 
-                        {Auth.loggedIn() ? (
-                            <button onClick={submitCheckout}>Checkout</button>
-                        ) : (
-                            <span>(log in to check out)</span>
-                        )}
+                            {Auth.loggedIn() ? (
+                                <button onClick={submitCheckout}>Checkout</button>
+                            ) : (
+                                <span>(log in to check out)</span>
+                            )}
+                        </div>
                     </div>
-                </div>
-            ) : (
-                <h3>
-                    <h2 id="test">Shopping Cart</h2>
-                    <span role="img" aria-label="shocked">
-                        😱
-                    </span>
-                    You haven't added anything to your cart yet!
-                </h3>
-            )}
+                ) : (
+                    <h3>
+                        <h2 id="test">Shopping Cart</h2>
+                        <span role="img" aria-label="shocked">
+                            😱
+                        </span>
+                        You haven't added anything to your cart yet!
+                    </h3>
+                )}
+            </div>
         </div>
     );
 };

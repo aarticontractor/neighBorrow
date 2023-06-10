@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { Card, CardActionArea, CardContent, CardMedia, Typography, Button } from '@material-ui/core';
+// import { useSelector, useDispatch } from 'react-redux';
+import { Card, CardActionArea, CardContent, CardMedia, Typography, } from '@material-ui/core';
 import anime from 'animejs';
 import "../index.css";
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 
 
@@ -13,14 +13,14 @@ import { useNavigate } from 'react-router-dom';
 const ProductCard = ({ product, onProductClick, disabled }) => {
     const nameRef = useRef(null);
     const priceRef = useRef(null);
-    const navigate = useNavigate();
-    const navigateToDetail = () => {
-        navigate('/Detail');
-    }
-    const state = useSelector((state) => {
-        return state;
-    });
-    const dispatch = useDispatch();
+    // const navigate = useNavigate();
+    // const navigateToDetail = () => {
+    //     navigate('/Detail');
+    // }
+    // const state = useSelector((state) => {
+    //     return state;
+    // });
+    // const dispatch = useDispatch();
 
     useEffect(() => {
         anime({

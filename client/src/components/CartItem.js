@@ -53,12 +53,12 @@ const CartItem = ({ item }) => {
                     alt="" />
             </div>
             <div>
-                <div>{item.name}, ${item.price}</div>
+                <div>{item.name}: ${item.price}</div>
 
 
                 {/* </Link> */}
                 <div>
-                    <span>Qty:</span>
+                    <span>Qty: </span>
                     <input
                         type="number"
                         placeholder="1"

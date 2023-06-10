@@ -11,6 +11,10 @@
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
     border-bottom-left-radius: 0.5rem;
 }
+item {
+    font-size: 24px;
+    font-weight: bolder;
+}
 
 #test {
     font-size: 1.5rem;
