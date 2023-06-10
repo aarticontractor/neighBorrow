@@ -30,6 +30,7 @@ function Nav() {
 
     const handleCategoryClick = (event) => {
         setAnchorElCategories(event.currentTarget);
+
     };
 
     const handleProfileClick = (event) => {
@@ -125,7 +126,7 @@ function Nav() {
                         >
                             <MenuItem onClick={handleProfileClose}>{`Welcome, ${user.firstName}`}</MenuItem>
                             <MenuItem onClick={() => Auth.logout()}>Logout</MenuItem>
-                            <MenuItem component={RouterLink} to="/userProfile">Profile</MenuItem>
+                            <MenuItem onClick={handleProfileClose} component={RouterLink} to="/userProfile">Profile</MenuItem>
                         </Menu>
                     </>
                 ) : (
