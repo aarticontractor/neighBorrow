@@ -65,17 +65,20 @@
 ## YouTube Demo Walkthrough Video:
 [Click Here to Watch]()
 
-## Screenshots of Project: 
+## Gif's of Project: 
 
 ### Figure 1.
-
+![Untitled_ Jun 12, 2023 1_03 AM](https://github.com/aarticontractor/neighBorrow/assets/127444682/cca94bfd-1284-4954-ad28-f81dd79c58cc)
 ### Figure 2. 
-
+![Untitled_ Jun 12, 2023 2_10 AM (1)](https://github.com/aarticontractor/neighBorrow/assets/127444682/73072f62-8359-4f5f-a150-2fc7e667a0cf)
 ### Figure 3. 
+![Untitled_ Jun 12, 2023 1_26 AM](https://github.com/aarticontractor/neighBorrow/assets/127444682/a3f07864-510c-4f68-8b54-ed555b823ca5)
 
 ### Figure 4.
+![Untitled_ Jun 12, 2023 1_04 AM](https://github.com/aarticontractor/neighBorrow/assets/127444682/5fa48ca1-5326-4c1c-9cf1-d0e1a151dd9a)
 
 ### Figure 5. 
+![Untitled_ Jun 12, 2023 1_03 AM](https://github.com/aarticontractor/neighBorrow/assets/127444682/eac0d486-6193-41a2-9076-fd274d4c55e5)
 
 
 #
