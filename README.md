@@ -4,7 +4,8 @@
 #
 
 # Description: 
-### NeighBorrow, a share app that allows households to share items and seek help from neighbors as a valuable solution for reducing redundant purchases and fostering community collaboration.
+### NeighBorrow, a share app that allows households to share items and seek help from neighbors as a valuable solution for reducing redundant purchases and fostering community collaboration. Many people can't afford to purchase everything new, so we decided to make something where users can just borrow something like tools, gear, etc for a few days. Sharing items is not only good for the environment, it creates strong bonds and connections between you and your neighborhood
+
 #
 ## Table of Contents:
 - [Overview](#Overview)
@@ -50,16 +51,12 @@
 #
 
 
-
-
-
-
-## Usage Instructions:
+## 
 
 
 #
 ## Deployed Live Link:
-[Click here for NeighBorrow live link]()
+[Click here for NeighBorrow live link](https://neighborrow.herokuapp.com/)
 
 
 ## YouTube Demo Walkthrough Video:
@@ -67,48 +64,19 @@
 
 ## Gif's of Project: 
 
-
-
-
-![Untitled_ Jun 12, 2023 3_00 AM](https://github.com/aarticontractor/neighBorrow/assets/127444682/a7d6eaa0-e314-4103-8bc5-6bf0a85a07d7)
-
-
-![Untitled_ Jun 12, 2023 2_10 AM (1)](https://github.com/aarticontractor/neighBorrow/assets/127444682/cbd901f3-23d4-4353-98be-6fd7dcf45919)
-
-
-
-![Untitled_ Jun 12, 2023 1_26 AM](https://github.com/aarticontractor/neighBorrow/assets/127444682/2c137d8d-7686-40e0-87ac-70b510024268)
-
-![Untitled_ Jun 12, 2023 1_04 AM](https://github.com/aarticontractor/neighBorrow/assets/127444682/c58b6a69-bd93-4016-87e1-4ee36ab03d5f)
-
-
-![Untitled_ Jun 12, 2023 1_03 AM](https://github.com/aarticontractor/neighBorrow/assets/127444682/68266f5c-ff88-4626-89f5-2f9a35c375a0)
-
-
 ### Figure 1.
+# Below this gif is demonstrating the user login feature and pulling up the user's profile
 ![Untitled_ Jun 12, 2023 1_03 AM](https://github.com/aarticontractor/neighBorrow/assets/127444682/cca94bfd-1284-4954-ad28-f81dd79c58cc)
-### Figure 2. 
-![Untitled_ Jun 12, 2023 2_10 AM (1)](https://github.com/aarticontractor/neighBorrow/assets/127444682/73072f62-8359-4f5f-a150-2fc7e667a0cf)
-### Figure 3. 
-![Untitled_ Jun 12, 2023 1_26 AM](https://github.com/aarticontractor/neighBorrow/assets/127444682/a3f07864-510c-4f68-8b54-ed555b823ca5)
-
-### Figure 4.
-![Untitled_ Jun 12, 2023 1_04 AM](https://github.com/aarticontractor/neighBorrow/assets/127444682/5fa48ca1-5326-4c1c-9cf1-d0e1a151dd9a)
-
-### Figure 5. 
-![Untitled_ Jun 12, 2023 1_03 AM](https://github.com/aarticontractor/neighBorrow/assets/127444682/eac0d486-6193-41a2-9076-fd274d4c55e5)
-
-
 #
-
-## Installation Process:
-
-
-
-
+### Figure 2. 
+# Below this gif is demonstrating the use of Lottie-React Files
+![Untitled_ Jun 12, 2023 2_10 AM (1)](https://github.com/aarticontractor/neighBorrow/assets/127444682/73072f62-8359-4f5f-a150-2fc7e667a0cf)
+#
+### Figure 3. 
+# Below this gif is demonstrating the search bar menu
+![Untitled_ Jun 12, 2023 1_26 AM](https://github.com/aarticontractor/neighBorrow/assets/127444682/a3f07864-510c-4f68-8b54-ed555b823ca5)
 #
 ## Built With:
-
 
 - MongoDB: [Download MongoDB](http://www.docs.mongodb.com/manual/installation/)
 - Express.js: [Download Express.js](http://www.github.com/expressjs/express)
@@ -125,12 +93,12 @@
 - Stripe: [Download Stripe](http://www.stripe.com/docs)
 - License Badge: [MIT](https://opensource.org/licenses/MIT))
 - Visual Studio Code: [Website](https://code.visualstudio.com/)
-
-
-Extra resources that I used to complete this challenge: 
- - 
- - 
-
+- Cloudinary: [Website](https://cloudinary.com/)
+- Apollo Client: [Download]([)](https://www.apollographql.com/docs/react/get-started/)
+- JWT: [Website](https://jwt.io/)
+- Anime.js: [Download](https://animejs.com/)
+- Lottie-React Files: [Website](https://lottiefiles.com/blog/working-with-lottie/how-to-use-lottie-in-react-app/)
+- Redux: [Download](https://www.tutorialspoint.com/redux/redux_installation.htm)
 
 
 ## Code Snippets 
@@ -138,28 +106,81 @@ Extra resources that I used to complete this challenge:
 
 ```sh
 
+return (
+    <main className={classes.card}>
+      <Card>
+        <CardHeader
+          className={classes.cardHeader}
+          title="Sign Up"
+        />
+        <CardContent className={classes.cardContent}>
+          <form onSubmit={handleFormSubmit}>
+            <TextField
+              className={classes.formInput}
+              label="First Name"
+              name="firstName"
+              type="text"
+              value={formState.firstName}
+              onChange={handleChange}
+              fullWidth
+            />
+            <Button
+              className={classes.formInput}
+              variant="contained"
+              color="primary"
+              type="submit"
+              fullWidth
+            >
+              Submit
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
+    </main>
+  );
 
-
-
-
-
-
-**ABOVE: 
-
+**ABOVE: This snippet uses Material UI to craft a sign-up form. Card and TextField components form the structure and inputs, while a Button handles submissions. All components are stylized using classes generated by the makeStyles function.
 ```
 #
 
 
 ```sh
 
-
-
-
-
-
-
+useEffect(() => {
+  const filterByUser = () => {
+    if (data) {
+      let active = [], expired = [];
+      data.getProducts.forEach(product => {
+        if (product.user._id === user.userId) {
+          if (checkDate(product.start_date, product.end_date)) active.push(product);
+          else expired.push(product);
+        }
+      });
+      setActiveProducts(active);
+      setExpiredProducts(expired);
+    }
+  }
+  filterByUser();
+}, [products, data]);
   
-**ABOVE: 
+**ABOVE: After fetching the products data, a useEffect hook is used to filter and assign active and expired products based on the product ownership and date. It segregates the products belonging to the current user into active or expired categories.
+```
+#
+
+
+```sh
+
+<ProductList products={activeProducts} handleDelete={handleDelete} handleEdit={handleEdit} handleRelist={handleRelist} active={true} expired={false} />
+</TabPanel>
+<TabPanel value={activeTab} index={1}>
+  <ProductList products={expiredProducts} handleDelete={handleDelete} handleEdit={handleEdit} handleRelist={handleRelist} active={false} expired={true} />
+</TabPanel>
+
+
+
+
+
+**ABOVE: The ProductList components use activeProducts and expiredProducts arrays to render product listings. They offer delete, edit, and re-list functions through passed handlers. Updating these arrays triggers automatic re-rendering, keeping product listings up-to-date.
 
 ```
 #
@@ -167,36 +188,34 @@ Extra resources that I used to complete this challenge:
 
 ```sh
 
+ addProduct: async (_, { name, description, image, price, categoryId, userId, start_date, end_date }) => {
+
+            const newProduct = new Product({
+                name,
+                description,
+                image,
+                price,
+                category: categoryId,
+                user: userId,
+                start_date,
+                end_date,
+            });
+
+            return await newProduct.save();
+        },
 
 
 
-
-
-
-
-**ABOVE: 
-
-```
-#
-
-
-```sh
-
- 
-
-
-
-
-**ABOVE: 
-
+**ABOVE: Here is the resolver mutation to Add a new product where it uses the ‘.save’ method to save the new Product in the Product model
 ```
 #
 
 ## What We Learned:
-### In this challenge, as a software engineering bootcamp team, we have learned to:
+###Throughout the course of our project, we grappled with numerous challenges that ultimately fortified our technical prowess. Implementing Redux presented a steep learning curve, however, it also allowed us to better understand the intricacies of managing application state and ensuring smooth data flow.
 
+We encountered and resolved compatibility issues between React-lottie and node v16, learning to address deprecation errors in the process. The solution, which involved using the command 'npm i --legacy-peer-deps', served as a temporary fix, reinforcing our understanding of dependency management in Node.js.
 
-
+Lastly, our attempts to integrate Cloudinary from the server-side were met with several obstacles. Transitioning to a client-side approach eventually resolved these issues, offering us valuable insights into flexible problem-solving and the importance of adaptability in the deployment of third-party services. This experience bolstered our capacity to assess, adjust and implement complex integrations in the software development process.
 
 
 ## License & Copyright ©
