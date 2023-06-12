@@ -1,0 +1,162 @@
+[
+    {
+        "_id": {
+            "$oid": "64866eb3fe5db262f0ef0026"
+        },
+        "name": "Gadgets",
+        "parent": "Play Hard",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "64866eb3fe5db262f0ef0029"
+        },
+        "name": "Camping gear",
+        "parent": "Play Hard",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "64866eb4fe5db262f0ef002c"
+        },
+        "name": "Fitness Equipment",
+        "parent": "Play Hard",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "64866eb4fe5db262f0ef002f"
+        },
+        "name": "Party Supplies",
+        "parent": "Play Hard",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "64866eb4fe5db262f0ef0032"
+        },
+        "name": "Sports Equipment",
+        "parent": "Play Hard",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "64866eb4fe5db262f0ef0035"
+        },
+        "name": "Winter Sports Gear",
+        "parent": "Play Hard",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "64866eb4fe5db262f0ef0038"
+        },
+        "name": "Photography Equipment",
+        "parent": "Play Hard",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "64866eb4fe5db262f0ef003b"
+        },
+        "name": "Board Games",
+        "parent": "Play Hard",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "64866eb4fe5db262f0ef003e"
+        },
+        "name": "Musical instruments",
+        "parent": "Play Hard",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "64866eb4fe5db262f0ef0041"
+        },
+        "name": "Fishing Equipment",
+        "parent": "Play Hard",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "64866eb4fe5db262f0ef0044"
+        },
+        "name": "Computers and Laptops",
+        "parent": "Work Hard",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "64866eb4fe5db262f0ef0047"
+        },
+        "name": "Professional Tools",
+        "parent": "Work Hard",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "64866eb5fe5db262f0ef004a"
+        },
+        "name": "Printing and Scanning Equipment",
+        "parent": "Work Hard",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "64866eb5fe5db262f0ef004d"
+        },
+        "name": "Kitchen Appliances",
+        "parent": "Work Hard",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "64866eb5fe5db262f0ef0050"
+        },
+        "name": "Heavy Machinery",
+        "parent": "Work Hard",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "64866eb5fe5db262f0ef0053"
+        },
+        "name": "Carpentry Tools",
+        "parent": "Work Hard",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "64866eb5fe5db262f0ef0056"
+        },
+        "name": "Office supplies",
+        "parent": "Work Hard",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "64866eb5fe5db262f0ef0059"
+        },
+        "name": "Painting and Decorating Tools",
+        "parent": "Work Hard",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "64866eb5fe5db262f0ef005c"
+        },
+        "name": "Plumbing Tools",
+        "parent": "Work Hard",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "64866eb5fe5db262f0ef005f"
+        },
+        "name": "Electronic Test Equipment",
+        "parent": "Work Hard",
+        "__v": 0
+    }
+]

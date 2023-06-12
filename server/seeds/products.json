@@ -1,0 +1,333 @@
+[
+    {
+        "_id": {
+            "$oid": "647d2f3b9a37d8876ab32429"
+        },
+        "user": {
+            "$oid": "647d20f7c8d4d513f9ebf443"
+        },
+        "name": "Iphone",
+        "price": 10.5,
+        "category": {
+            "$oid": "64866eb4fe5db262f0ef0038"
+        },
+        "__v": 0,
+        "image": "https://media.wired.com/photos/6332360740fe1e8870aa3bc0/3:2/w_2400,h_1600,c_limit/iPhone-14-Review-Gear.jpg",
+        "end_date": "2023-05-20",
+        "start_date": "2023-05-05"
+    },
+    {
+        "_id": {
+            "$oid": "647e10e0a66a93c37268756a"
+        },
+        "user": {
+            "$oid": "647d20f7c8d4d513f9ebf443"
+        },
+        "name": "Ipad",
+        "price": 100,
+        "category": {
+            "$oid": "64866eb3fe5db262f0ef0026"
+        },
+        "__v": 0,
+        "image": "https://www.apple.com/v/ipad-10.9/b/images/overview/hero/hero__ecv967jz1y82_large_2x.jpg",
+        "end_date": "2023-06-20",
+        "start_date": "2023-06-05"
+    },
+    {
+        "_id": {
+            "$oid": "647e13045a758720a9fb15f6"
+        },
+        "user": {
+            "$oid": "647d20f7c8d4d513f9ebf443"
+        },
+        "name": "MacBook",
+        "price": 2000,
+        "category": {
+            "$oid": "64866eb4fe5db262f0ef0044"
+        },
+        "__v": 0,
+        "image": "https://media.cnn.com/api/v1/images/stellar/prod/220715122428-macbook-air-m2-review-9.jpg?c=16x9&q=h_720,w_1280,c_fill",
+        "end_date": "2023-06-20",
+        "start_date": "2023-06-05"
+    },
+    {
+        "_id": {
+            "$oid": "647e131b5a758720a9fb15f8"
+        },
+        "user": {
+            "$oid": "647d20f7c8d4d513f9ebf443"
+        },
+        "name": "Airpods",
+        "price": 200,
+        "category": {
+            "$oid": "64866eb3fe5db262f0ef0026"
+        },
+        "__v": 0,
+        "image": "https://hips.hearstapps.com/hmg-prod/images/apple-airpods-pro-amazon-sale-2023-1675781255.jpg?crop=0.668xw:1.00xh;0.0289xw,0&resize=1200:*",
+        "end_date": "2023-06-20",
+        "start_date": "2023-06-05"
+    },
+    {
+        "_id": {
+            "$oid": "647fc71616f9e9e206d85a7a"
+        },
+        "user": {
+            "$oid": "647d20f7c8d4d513f9ebf443"
+        },
+        "name": "Tent",
+        "price": 50,
+        "category": {
+            "$oid": "64866eb3fe5db262f0ef0029"
+        },
+        "__v": 0,
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBNpiFaTdQ8zVk6erLePP-Lgt02oDeOuVjuhFLT2b_yA&usqp=CAU&ec=48665698",
+        "end_date": "2023-06-20",
+        "start_date": "2023-06-05"
+    },
+    {
+        "_id": {
+            "$oid": "6480b1c851339d86060c93d9"
+        },
+        "user": {
+            "$oid": "647d20f7c8d4d513f9ebf443"
+        },
+        "name": "Hammer",
+        "description": "Hammer for bigger nails",
+        "image": "https://t3.ftcdn.net/jpg/01/98/02/68/360_F_198026899_JGIdMPT8Tq9g1mgQHVNChju7cQzp7QnH.jpg",
+        "price": 15,
+        "category": {
+            "$oid": "64866eb4fe5db262f0ef0047"
+        },
+        "__v": 0,
+        "end_date": "2023-06-20",
+        "start_date": "2023-06-05"
+    },
+    {
+        "_id": {
+            "$oid": "6480e2588d2c7e148dd27b13"
+        },
+        "user": {
+            "$oid": "647d20f7c8d4d513f9ebf443"
+        },
+        "name": "Chair 1 piece",
+        "description": "1 chair",
+        "image": "https://res.cloudinary.com/dlfgz7bn4/image/upload/v1686168135/neighborrow/x15xtkji0dfztbf6dfet.jpg",
+        "price": 5,
+        "category": {
+            "$oid": "64866eb5fe5db262f0ef0056"
+        },
+        "__v": 0,
+        "end_date": "2023-06-20",
+        "start_date": "2023-06-05"
+    },
+    {
+        "_id": {
+            "$oid": "6480e94c8d2c7e148dd27b2c"
+        },
+        "user": {
+            "$oid": "647d20f7c8d4d513f9ebf443"
+        },
+        "name": "Mechanic Tool set",
+        "description": "The DEWALT DWMT72165 Mechanic Tool Kit and Socket Set includes 204 pieces, with a greater focus on sockets and ratchets than many other kits. That makes it a great choice for anyone who is looking to establish a complete mechanic tool set quickly, or for people who work on parts or projects with large numbers of nuts and bolts of different sizes. The sockets in the toolset include virtually any common size you may need and are clearly marked so you can easily find what you need when you need it. The kit includes 1/4-inch, 3/8-inch, and 1/2-inch SAE and metric sockets and ratchets, extensions, universal joints, torx bits, hex bits, combination wrenches, and hex keys, so whatever you need, chances are you'll find it here.",
+        "image": "https://res.cloudinary.com/dlfgz7bn4/image/upload/v1686169901/neighborrow/etwfqujxkzlfq1opyixx.jpg",
+        "price": 100,
+        "category": {
+            "$oid": "64866eb4fe5db262f0ef0047"
+        },
+        "__v": 0,
+        "end_date": "2023-06-20",
+        "start_date": "2023-06-05"
+    },
+    {
+        "_id": {
+            "$oid": "6480ea648d2c7e148dd27b36"
+        },
+        "user": {
+            "$oid": "647d20f7c8d4d513f9ebf443"
+        },
+        "name": "Monopoly Board Game",
+        "description": "The world’s favorite family board game brings you another exciting edition of MONOPOLY – Worcester! Move around the board and your favorite sites, ...",
+        "image": "https://res.cloudinary.com/dlfgz7bn4/image/upload/v1686170201/neighborrow/tub5gsdq6qj1pxdrvioc.webp",
+        "price": 45,
+        "category": {
+            "$oid": "64866eb4fe5db262f0ef003b"
+        },
+        "__v": 0,
+        "end_date": "2023-06-20",
+        "start_date": "2023-06-05"
+    },
+    {
+        "_id": {
+            "$oid": "6480f2398bd44cddff914795"
+        },
+        "user": {
+            "$oid": "647d20f7c8d4d513f9ebf443"
+        },
+        "name": "Tennis racket",
+        "description": "Tennis racket single",
+        "image": "https://res.cloudinary.com/dlfgz7bn4/image/upload/v1686172203/neighborrow/md7ajz8sl7n3wkyjedxc.jpg",
+        "price": 20,
+        "category": {
+            "$oid": "64866eb4fe5db262f0ef0032"
+        },
+        "__v": 0,
+        "end_date": "2023-06-20",
+        "start_date": "2023-06-05"
+    },
+    {
+        "_id": {
+            "$oid": "6480f3ba8bd44cddff91479e"
+        },
+        "user": {
+            "$oid": "647d20f7c8d4d513f9ebf443"
+        },
+        "name": "Guitar",
+        "description": "Normal string guitar",
+        "image": "https://res.cloudinary.com/dlfgz7bn4/image/upload/v1686172584/neighborrow/qdl5h36pa49v8fuilsjg.jpg",
+        "price": 150,
+        "category": {
+            "$oid": "64866eb4fe5db262f0ef003e"
+        },
+        "__v": 0,
+        "end_date": "2023-06-20",
+        "start_date": "2023-06-05"
+    },
+    {
+        "_id": {
+            "$oid": "6480f4088bd44cddff9147a1"
+        },
+        "user": {
+            "$oid": "647d20f7c8d4d513f9ebf443"
+        },
+        "name": "Piano",
+        "description": "61 keys piano",
+        "image": "https://res.cloudinary.com/dlfgz7bn4/image/upload/v1686172672/neighborrow/yexklsrgmzw3wiaqlnq1.jpg",
+        "price": 250,
+        "category": {
+            "$oid": "64866eb4fe5db262f0ef003e"
+        },
+        "__v": 0,
+        "end_date": "2023-06-20",
+        "start_date": "2023-06-05"
+    },
+    {
+        "_id": {
+            "$oid": "6480f4948bd44cddff9147aa"
+        },
+        "user": {
+            "$oid": "647d20f7c8d4d513f9ebf443"
+        },
+        "name": "Hand tool",
+        "description": "",
+        "image": "https://res.cloudinary.com/dlfgz7bn4/image/upload/v1686172812/neighborrow/qycm1nr4wga6zvprsrcg.jpg",
+        "price": 5,
+        "category": {
+            "$oid": "64866eb5fe5db262f0ef0053"
+        },
+        "__v": 0,
+        "end_date": "2023-06-20",
+        "start_date": "2023-06-05"
+    },
+    {
+        "_id": {
+            "$oid": "6480fab38bd44cddff9147b0"
+        },
+        "user": {
+            "$oid": "647d20f7c8d4d513f9ebf443"
+        },
+        "name": "Rucksack",
+        "description": "Take a day trip down your favorite hiking trail with the Ozark Trail 35L Silverthorne Backpack. This backpack is made hydration compatible and is ",
+        "image": "https://res.cloudinary.com/dlfgz7bn4/image/upload/v1686174366/neighborrow/y5bhfjujpqucn7fq896j.webp",
+        "price": 60,
+        "category": {
+            "$oid": "64866eb3fe5db262f0ef0029"
+        },
+        "__v": 0,
+        "end_date": "2023-06-20",
+        "start_date": "2023-06-05"
+    },
+    {
+        "_id": {
+            "$oid": "6480fb7c8bd44cddff9147b6"
+        },
+        "user": {
+            "$oid": "647d20f7c8d4d513f9ebf443"
+        },
+        "name": "Tea Kettle",
+        "description": "About this item\n9 x 5.5 x 6 inch\nMade of beautiful blue earthenware\n37-ounce capacity, holds approx. 6 tea cups worth\nFeatures a d-shaped opening for better lid retention while pouring\nEffectively holds heat in to keep tea warm, with a stay-cool handle for less burns",
+        "image": "https://res.cloudinary.com/dlfgz7bn4/image/upload/v1686174565/neighborrow/ulazwu7plbpnlegdoirr.webp",
+        "price": 25,
+        "category": {
+            "$oid": "64866eb3fe5db262f0ef0029"
+        },
+        "__v": 0,
+        "end_date": "2023-06-20",
+        "start_date": "2023-06-05"
+    },
+    {
+        "_id": {
+            "$oid": "64837267c262785e8bdc7644"
+        },
+        "user": {
+            "$oid": "64815a45890e228100564e87"
+        },
+        "name": "Nail tool",
+        "description": "",
+        "image": "https://res.cloudinary.com/dlfgz7bn4/image/upload/v1686336085/neighborrow/sbeovlfexd46k6knc5t8.jpg",
+        "price": 20,
+        "category": {
+            "$oid": "64866eb4fe5db262f0ef0047"
+        },
+        "start_date": {
+            "$date": "2023-06-12T01:20:34.144Z"
+        },
+        "end_date": {
+            "$date": "2023-06-29T01:20:00.000Z"
+        },
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "6483928eeb6514db90c7e926"
+        },
+        "user": {
+            "$oid": "64815a45890e228100564e87"
+        },
+        "name": "tennis racket 2 piece",
+        "description": "",
+        "image": "https://res.cloudinary.com/dlfgz7bn4/image/upload/v1686344322/neighborrow/uef4tcjkbuoilsm8pjpp.jpg",
+        "price": 20,
+        "category": {
+            "$oid": "64866eb4fe5db262f0ef0032"
+        },
+        "start_date": {
+            "$date": "2023-06-09T00:00:00.000Z"
+        },
+        "end_date": {
+            "$date": "2023-06-28T00:00:00.000Z"
+        },
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "648392bceb6514db90c7e92c"
+        },
+        "user": {
+            "$oid": "64815a45890e228100564e87"
+        },
+        "name": "Soccer cleats 2 - updated",
+        "description": "",
+        "image": "https://res.cloudinary.com/dlfgz7bn4/image/upload/v1686344367/neighborrow/mdxlqxjv97woodyp9tms.webp",
+        "price": 25,
+        "category": {
+            "$oid": "64866eb4fe5db262f0ef0032"
+        },
+        "start_date": {
+            "$date": "2023-06-08T23:42:00.000Z"
+        },
+        "end_date": {
+            "$date": "2023-06-13T23:42:00.000Z"
+        },
+        "__v": 0
+    }
+]

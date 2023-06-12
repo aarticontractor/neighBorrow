@@ -1,26 +1,30 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-// import { useSelector, useDispatch } from 'react-redux';
-import { Card, CardActionArea, CardContent, CardMedia, Typography, } from '@material-ui/core';
+import { Card, CardActionArea, CardContent, CardMedia, Typography, Box } from '@material-ui/core';
 import anime from 'animejs';
-import "../index.css";
-// import { useNavigate } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+import { getAvailability } from '../utils/checkDate';
 
-
-
-
+const useStyles = makeStyles((theme) => ({
+    productCard: {
+        transition: '0.3s',
+        boxShadow: '0 8px 40px -12px rgba(0,0,0,0.3)',
+        '&:hover': {
+            boxShadow: '0 16px 70px -12.125px rgba(0,0,0,0.3)'
+        },
+        textAlign: 'center'
+    },
+    availability: {
+        color: props => props.color
+    }
+}));
 
 const ProductCard = ({ product, onProductClick, disabled }) => {
     const nameRef = useRef(null);
     const priceRef = useRef(null);
-    // const navigate = useNavigate();
-    // const navigateToDetail = () => {
-    //     navigate('/Detail');
-    // }
-    // const state = useSelector((state) => {
-    //     return state;
-    // });
-    // const dispatch = useDispatch();
+
+    const availability = getAvailability(product.start_date, product.end_date);
+    const classes = useStyles({ color: availability.color });
 
     useEffect(() => {
         anime({
@@ -32,15 +36,8 @@ const ProductCard = ({ product, onProductClick, disabled }) => {
         });
     }, []);
 
-
-    // const addToCartHandler = () => {
-    //     // Implement your add to cart logic here
-    // };
-
-    // const { image, name, _id, price, description } = item;
-
     return (
-        <Card>
+        <Card className={classes.productCard}>
             <CardActionArea>
                 <Link to={`/products/${product._id}`}>
                     <CardMedia
@@ -61,20 +58,12 @@ const ProductCard = ({ product, onProductClick, disabled }) => {
                 <Typography variant="body2" color="textSecondary" ref={priceRef}>
                     ${product.price}
                 </Typography>
-            </CardContent >
-            {/* <Button disabled={disabled} onClick={addToCartHandler}>
-                {disabled ? 'Unavailable' : 'Add to Cart'}
-            </Button> */}
-            {/* <Button onClick={addToCart} variant="contained" color="primary">
-                Add To Cart
-            </Button> */}
-
-            {/* <Button disabled={disabled} onClick={addToCartHandler}>
-                {disabled ? 'Unavailable' : 'Add to Cart'}
-            </Button> */}
-        </Card >
+                <Typography variant="body2" className={classes.availability}>
+                    {availability.status}
+                </Typography>
+            </CardContent>
+        </Card>
     );
 };
-
 
 export default ProductCard;
